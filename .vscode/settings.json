@@ -1,0 +1,8 @@
+{
+  "code-runner.runInTerminal": true,
+  "code-runner.saveFileBeforeRun": true,
+  "code-runner.ignoreSelection": true,
+  "code-runner.executorMap": {
+    "html": "cd $dir && bun $fileName"
+  }
+}
