@@ -4,16 +4,21 @@
     --main-bg-color: hsl(41, 20%, 50%);
     --title-color: hsl(40, 33%, 12%);
     --body-color: hsl(41, 28%, 63%);
+    --nav-color: beige;
 }
-
+h1 {
+    margin:0
+}
 body {
+
+    margin:0;
     background-color: var( --body-color);
-    min-height: 97vh;
-    /*height: 100vh
-    width: 100 vw cela fait que la page devient trop grand à voir si on les remets
-     */
+    min-height: 100vh;
+    /* height: 100vh
+     width: 100 vw cela fait que la page devient trop grand à voir si on les remets
+      */
     display:grid;
-    grid-template-rows: 80px 1fr 60px;
+    grid-template-rows: auto 1fr auto;
     grid-template-columns: 1fr 60px;
     grid-template-areas:
         "Titre menu"
@@ -26,7 +31,7 @@ body {
 h1, h2, h3, h4 {
     color: var(--title-color);
     text-decoration: underline;
-
+    word-spacing: 5px;
     font-family: 'Rubik', Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
@@ -36,6 +41,7 @@ header{
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    padding:5px;
 }
 header p{
     font-size:20px;
@@ -44,8 +50,10 @@ header p{
     grid-area:menu;
     display:none;
 }
-.menu {
-    border: 2px solid black;
+.menu{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 30px;
 }
 #liste:checked~.sidebar{
     display:flex;
@@ -60,7 +68,7 @@ header p{
     height: 100%;
     position: fixed;
     z-index: 100;
-    background-color: beige;
+    background-color: var(--nav-color);
 }
 .menu-fermer{
     position:fixed;
@@ -74,20 +82,29 @@ main{
 }
 
 footer{
+    width:100%;
+    padding:0;
+    margin:0;
     grid-area:Footer;
     display:flex;
     justify-content: center;
+    background-color:bisque;
+    border-radius: 5px;
 }
 
 .sidebar ul{
     list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
-a{
+
+.sidebar a{
     color:black;
     text-decoration: none;
     right:0;
 }
-a:visited{
+.sidebar a:visited{
     color:blue;
 }
 .image{
