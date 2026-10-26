@@ -5,6 +5,10 @@
     --title-color: hsl(40, 33%, 12%);
     --body-color: hsl(41, 28%, 63%);
     --nav-color: beige;
+    --section-color:blanchedalmond;
+    --image-color:antiquewhite;
+    --arcticle-color:cornsilk;
+    --footer-color:bisque;
 }
 h1 {
     margin:0
@@ -88,7 +92,7 @@ footer{
     grid-area:Footer;
     display:flex;
     justify-content: center;
-    background-color:bisque;
+    background-color:var(--footer-color);
     border-radius: 5px;
 }
 
@@ -104,18 +108,31 @@ footer{
     text-decoration: none;
     right:0;
 }
-.sidebar a:visited{
+
+.sidebar a:hover{
     color:blue;
 }
 .image{
     display:flex;
     flex-direction: row;
     justify-content: center;
+    background-color: var(--image-color);
+    border-radius: 5px;
+}
+article{
+    border-radius: 5px;
+    background-color: var(--arcticle-color);
 }
 img{
     display: block;
     height: 400px;
     width: auto;
     max-width: 100%;
-    padding:10px
+    padding:10px;
+
+}
+section{
+    background-color:var(--section-color);
+    border-radius: 5px;
+
 }

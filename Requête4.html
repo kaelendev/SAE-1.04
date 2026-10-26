@@ -34,7 +34,50 @@
 <main>
     <section>
         <article class="image">
-            <img src="assets/image/rêquete4_code.png" alt="Code SQL" title="Code SQL">
+           <pre>SELECT
+    P.NomProd,
+    F.Societe,
+    ROUND(P.CoutAchat * C.CoefMarge, 2) AS Prix,
+    (
+        SELECT
+            COUNT(*)
+        FROM
+            Produit AS P
+            INNER JOIN Categorie AS C ON P.CodeCateg = C.CodeCateg
+        WHERE
+            C.NomCateg = "Viandes"
+            AND P.RefProd NOT IN (
+                SELECT
+                    [Réf produit]
+                FROM
+                    DetailCommande
+            )
+    ) AS Nombres_non_vendus,
+    (
+        SELECT
+            COUNT(*)
+        FROM
+            Produit AS P
+            INNER JOIN Categorie AS C ON P.CodeCateg = C.CodeCateg
+        WHERE
+            C.NomCateg = "Viandes"
+    ) AS Nombres_total
+FROM
+    (
+        Categorie AS C
+        INNER JOIN Produit AS P ON C.CodeCateg = P.CodeCateg
+    )
+    INNER JOIN Fournisseur AS F ON P.NoFour = F.NoFour
+WHERE
+    C.NomCateg = "Viandes"
+    AND P.RefProd NOT IN (
+        SELECT
+            [Réf produit]
+        FROM
+            DetailCommande
+    )
+ORDER BY
+    P.NomProd;</pre>
             <img src="assets/image/requête4_résultat.png" alt="Résultat" title="Résultat">
         </article>
         <article class="écrire">
