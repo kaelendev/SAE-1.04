@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <title>Requête 2</title>
+    <link rel="stylesheet" href="assets/css/css.css">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>Title</title>
 </head>
 <body>
-
 <header>
-    <h1> Requête 2 : </h1>
-    <p> Dans une réflexion en lien avec l’origine de ses produits : Quel est le CA
+    <h1> Rêquete 2 :</h1>
+    <p>  Dans une réflexion en lien avec l’origine de ses produits : On veut comme indicateur le CA
         total généré à ce jour avec les fournisseurs de l’UE ?</p>
 </header>
 <nav>
@@ -19,39 +18,109 @@
     <div class="sidebar">
         <label class="menu-fermer" for="liste">&times;</label>
         <ul>
-        <li> <h4> Page principale</h4></li>
-        <li> <a href="index.html"> Page d'accueil</a></li>
-        <li> <h4> Requêtes Kdou</h4> </li>
-        <li> <a href="Requête3.html"> Requête 3 </a></li>
-        <li> <a href="Requête4.html"> Requête 4 </a></li>
-        <li> <a href="Requête5.html"> Requête 5 </a></li>
-        <li><h4> Requêtes personnelles pour Kdou</h4></li>
-        <li> <a href="Requête_perso_Aymeryck.html"> Requête perso Aymeryck </a></li>
-    </ul>
-
+            <li> <h4> Page principale</h4></li>
+            <li> <a href="index.html"> Page d'accueil</a></li>
+            <li> <h4> Requêtes Kdou</h4> </li>
+            <li> <a href="Requête3.html"> Requête 3 </a></li>
+            <li> <a href="Requête4.html"> Requête 4 </a></li>
+            <li> <a href="Requête5.html"> Requête 5 </a></li>
+            <li><h4> Requêtes personnelles pour Kdou</h4></li>
+            <li> <a href="Requête_perso_Aymeryck.html"> Requête perso Aymeryck </a></li>
+        </ul>
 
     </div>
 </nav>
-<main>
-    <section>
-        <article class="image">
-            <img src="assets/image/Requête2_code.png" alt="Code SQL" title="Code SQL">
-            <img src="assets/image/requête2_résultat.png" alt="Résultat" title="Résultat">
-        </article>
-        <article class="écrire">
-            <h3> Notre réflexion </h3>
-            <p> L'intérêt d'analyser le CA des produits issus de fournisseurs de l'UE est de repérer les produits les plus rentables pour KDou.
-                Cela permet également d'identifier les fournisseurs avec lesquels maintenir de bonnes relations et ceux avec qui des ajustements sont nécessaires.</p>
-        </article>
-        <article class="écrire">
-            <h3> Comment on a fait cette requête.</h3>
-            <p> La requête détaille le CA par produit et par fournisseur, avec le pays d’origine et la marge générée par KDou. Afin de pouvoir pleinement identifier l'origine des produits.
-                Les résultats sont classés du plus gros CA au plus petit afin de repérer les fournisseurs dont les produits rapportent le plus.</p>
-            </article>
-    </section>
-</main>
+<div class="text penser">
+    <h2> Notre réflexion </h2>
+    <p>L'intérêt d'analyser le CA des produits issus de fournisseurs de l'UE est de repérer les produits les plus rentables pour KDou.
+        Cela permet également d'identifier les fournisseurs avec lesquels maintenir de bonnes relations et ceux avec qui des ajustements sont nécessaires.
+    </p>
+</div>
+<div class="text action">
+    <h2> Ce qu'on a fait</h2>
+    <p>La requête détaille ce CA par produit et par fournisseur, avec le pays d’origine et la marge générée par KDou,
+        classés du plus gros CA au plus petit, afin de repérer les fournisseurs dont les produits rapportent le plus</p>
+</div>
+
+<div class="code">
+<pre><code><span class="fontions">SELECT</span>
+    F.Societe,
+    P.NomProd,
+    Pa.PaysFR,
+    <span class="fontions">ROUND</span>(<span class="fontions">SUM</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> VENTE,
+    <span class="fontions">ROUND</span>(<span class="fontions">SUM</span>(DC.Quantité * P.CoutAchat * (C.CoefMarge * (1 - DC.[Remise (%)]) - 1)), 2) <span class="fontions">AS</span> Marge
+<span class="fontions">FROM</span> Categorie <span class="fontions">AS</span> C
+    <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
+    <span class="fontions">INNER JOIN</span> Fournisseur <span class="fontions">AS</span> F <span class="fontions">ON</span> P.NoFour = F.NoFour
+    <span class="fontions">INNER JOIN</span> DetailCommande <span class="fontions">AS</span> DC <span class="fontions">ON</span> P.RefProd = DC.[Réf produit]
+    <span class="fontions">INNER JOIN</span> Pays <span class="fontions">AS</span> Pa <span class="fontions">ON</span> F.NoPays = Pa.NoPays
+<span class="fontions">WHERE</span>
+    Pa.UE <span class="fontions">LIKE</span> "MEMBRE"
+<span class="fontions">GROUP BY</span>
+    F.Societe,
+    P.NomProd,
+    Pa.PaysFR
+<span class="fontions">ORDER BY</span>
+    VENTE <span class="fontions">DESC</span>;</code></pre>
+</div>
+
+
+<div class="tableau">
+    <table>
+        <caption> Extrait de notre résultat </caption>
+        <thead>
+        <tr>
+            <th scope="col">Société</th>
+            <th scope="col">Nom produit</th>
+            <th scope="col"> PaysFR</th>
+            <th scope="col">Ventes</th>
+            <th scope="col">Marges</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Moines de Paris</td>
+            <td>Côte de Blaye</td>
+            <td>France</td>
+            <td>402413,84</td>
+            <td>230699,7</td>
+        </tr>
+        <tr>
+            <td>Dolci e Sapori s.r.l.</td>
+            <td>Gorgonzola Telino</td>
+            <td>Italie</td>
+            <td>224265,46</td>
+            <td>113187,9</td>
+        </tr>
+        <tr>
+            <td>EthnicFood France</td>
+            <td>Camembert Pierrot</td>
+            <td>France</td>
+            <td>222359,69</td>
+            <td>113599,69</td>
+        </tr>
+        <tr>
+            <td>Dolci e Sapori s.r.l.</td>
+            <td>Mascarpone Fabioli</td>
+            <td>Italie</td>
+            <td>213470,4</td>
+            <td>103790,4</td>
+        </tr>
+        <tr>
+            <td>TanteGreta Handelsgruppe AG</td>
+            <td>Rhönbräu Klosterbier</td>
+            <td>Allemagne</td>
+            <td>204520,19</td>
+            <td>116558,16</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 <footer>
-    <p> Rapport 2026 Base de données Kdou par Aymeryck Thomas Jimmy et Gabriel</p>
+    <p> Rapport de la SAE Base de données 2026 fait par Aymeryck Thomas Jimmy et Gabriel</p>
 </footer>
+
+
 </body>
 </html>

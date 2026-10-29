@@ -2,16 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <title>Requête 2</title>
+    <link rel="stylesheet" href="assets/css/css.css">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>Title</title>
 </head>
 <body>
-
 <header>
-    <h1>Indicateur  perso   Aymeryck : </h1>
-    <p> Dans une réflexion en lien avec la demande :
-        regarder les produits commandés annuellements</p>
+    <h1> Rêquete perso :</h1>
 </header>
 <nav>
     <input type="checkbox" id="liste">
@@ -19,40 +16,131 @@
     <div class="sidebar">
         <label class="menu-fermer" for="liste">&times;</label>
         <ul>
-            <li> <h4> Page principale</h4></li>
+            <li> <h3> Page principale</h3></li>
             <li> <a href="index.html"> Page d'accueil</a></li>
-            <li> <h4> Requêtes Kdou</h4> </li>
-            <li> <a href="Requête2.html"> Requête 2 </a></li>
+            <li> <h3> Requêtes Kdou</h3> </li>
+            <li> <a href="Requête2.html"> Requête 2 (Le CA
+                total avec les fournisseurs de l’UE ?) </a></li>
             <li> <a href="Requête3.html"> Requête 3 </a></li>
-            <li> <a href="Requête4.html"> Requête 4 </a></li>
             <li> <a href="Requête5.html"> Requête 5 </a></li>
-            <li><h4> Requêtes personnelles pour Kdou</h4></li>
+            <li><h3> Requêtes personnelles pour Kdou</h3></li>
+            <li> <a href="Requête_perso_Aymeryck.html"> Requête perso Aymeryck </a></li>
         </ul>
 
     </div>
 </nav>
-<main>
-    <section>
-        <article class="image">
-            <img src="assets/image/requete_perso_aymeryck_code.png" alt="Code SQL" title="Code SQL">
-            <img src="assets/image/requête_perso_aymeryck_résultat.png" alt="Résultat" title="Résultat">
-        </article>
-        <article class="écrire">
-            <h3> Notre réflexion </h3>
-            <p> L'intérêt de cette requête est que KDou est une entreprise qui doit gérer ses stocks le maximun possible.
-            Pour cela, il faut mieux connaitre ses clients et leurs habitudes de commandes, c'est pour cela que de voir annuellement
-            ce qu'il commande est bien pour estimer une certaine quantitée de produits à stocker.</p>
-        </article>
-        <article class="écrire">
-            <h3> Comment on a fait cette requête.</h3>
-            <p>Les produits les plus commandés par année, avec le nombre de commandes et la quantité moyenne par commande,
-                mise à côté du stock actuel. Cela permet de repérer les produits pour lesquels KDou doit prévoir un stock plus important ou pour passer
-                commande.</p>
-        </article>
-    </section>
-</main>
+
+<div class="text penser">
+    <h2> Notre réflexion </h2>
+    <p>L'intérêt de cette requête est que KDou est une entreprise qui doit gérer ses stocks le maximun possible.
+        Pour cela, il faut mieux connaitre ses clients et leurs habitudes de commandes, c'est pour cela que de voir annuellement
+        ce qu'il commande est bien pour estimer une certaine quantitée de produits à stocker.
+    </p>
+</div>
+<div class="text action">
+    <h2> Ce qu'on a fait</h2>
+    <p>Les produits les plus commandés par année, avec le nombre de commandes et la quantité moyenne par commande,
+        mise à côté du stock actuel. Cela permet de repérer les produits pour lesquels KDou doit prévoir un stock plus important ou pour passer
+        commande.</p>
+</div>
+
+<div class="code">
+    <pre><code><span class="fontions">SELECT</span>
+    F.Societe,
+    P.NomProd,
+    <span class="chiffre">SUM</span>(DC.Quantité) <span class="fontions">AS</span> Quantité_commander,
+    <span class="chiffre">Count</span>(DC.[N° commande]) <span class="fontions">AS</span> Nombres_commandes,
+    <span class="chiffre">Round</span>(<span class="chiffre">AVG</span>(DC.Quantité), 1) <span class="fontions">AS</span> Moyenne_commander,
+    P.UnitStock,
+    <span class="chiffre">Year</span>(Co.DateCde) <span class="fontions">AS</span> Années
+<span class="fontions">FROM</span>
+    (
+        (
+            (
+                Fournisseur <span class="fontions">AS</span> F
+                <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> F.NoFour = P.NoFour
+            )<span class="fontions">INNER JOIN</span> DetailCommande <span class="fontions">AS</span> DC <span class="fontions">ON</span> P.RefProd = DC.[Réf produit]
+        )<span class="fontions">INNER JOIN</span> Categorie <span class="fontions">AS</span> C <span class="fontions">ON</span> P.CodeCateg = C.CodeCateg
+    )<span class="fontions">INNER JOIN</span> Commande <span class="fontions">AS</span> Co <span class="fontions">ON</span> DC.[N° commande] = Co.[N° commande]
+<span class="fontions">GROUP BY</span>
+    F.Societe,
+    P.NomProd,
+    P.UnitStock,
+    <span class="chiffre">Year</span>(Co.DateCde)
+<span class="chiffre">ORDER BY</span>
+    <span class="chiffre">Year</span>(Co.DateCde) <span class="fontions">DESC</span>,
+    5 <span class="fontions">DESC</span>;</code></pre>
+</div>
+
+
+<div class="tableau">
+    <table>
+        <caption> Extrait de notre résultat </caption>
+        <thead>
+        <tr>
+            <th scope="col">Société</th>
+            <th scope="col">Nom produit</th>
+            <th scope="col">Quantité_commander</th>
+            <th scope="col"> Nombres_commandes</th>
+            <th scope="col"> Moyenne_commander</th>
+            <th scope="col"> Unité en stock</th>
+            <th scope="col"> Années</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Nordlicht Feinkost GmbH</td>
+            <td>NuNuCa Nuß-Nougat-Creme</td>
+            <td>60</td>
+            <td>2</td>
+            <td>30</td>
+            <td>76</td>
+            <td>2022</td>
+        </tr>
+        <tr>
+            <td>TanteGreta Handelsgruppe AG</td>
+            <td>Wimmers gute Semmelknödel</td>
+            <td>30</td>
+            <td>2</td>
+            <td>15</td>
+            <td>22</td>
+            <td>2022</td>
+        </tr>
+        <tr>
+            <td>Havsmat Sverige AB</td>
+            <td>Röd Kaviar</td>
+            <td>20</td>
+            <td>2</td>
+            <td>10</td>
+            <td>2</td>
+            <td>2022</td>
+        </tr>
+        <tr>
+            <td>Coral Bay Delights Ltd.</td>
+            <td>Outback Lager</td>
+            <td>14</td>
+            <td>2</td>
+            <td>7</td>
+            <td>15</td>
+            <td>2022</td>
+        </tr>
+        <tr>
+            <td>Crème des Prés</td>
+            <td>Raclette Courdavault</td>
+            <td>24</td>
+            <td>4</td>
+            <td>6</td>
+            <td>79</td>
+            <td>2022</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 <footer>
-    <p> Rapport 2026 Base de données Kdou par Aymeryck Thomas Jimmy et Gabriel</p>
+    <p> Rapport de la SAE Base de données 2026 fait par Aymeryck Thomas Jimmy et Gabriel</p>
 </footer>
+
+
 </body>
 </html>

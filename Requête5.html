@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <title>Requête 5</title>
+    <link rel="stylesheet" href="assets/css/css.css">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>Title</title>
 </head>
 <body>
-
 <header>
-    <h1> Requête 3 : </h1>
-    <p>  Dans une réflexion sur le partenariat client : A-t-on des clients pilotes d’un réseau
+    <h1> Rêquete 5 :</h1>
+    <p> Dans une réflexion sur le partenariat client : A-t-on des clients pilotes d’un réseau
         partenaire ayant autant de commandes que les clients partenaires ? </p>
 </header>
 <nav>
@@ -31,26 +30,71 @@
 
     </div>
 </nav>
-<main>
-    <section>
-        <article class="image">
-            <img src="assets/image/requête5_code.png" alt="Code SQL" title="Code SQL">
-            <img src="assets/image/requête5_résultat.png" alt="Résultat" title="Résultat">
-        </article>
-        <article class="écrire">
-            <h3> Notre réflexion </h3>
-            <p> L'intéret de cette requête est de voir s'il y a des partenaires client qui commande autants qui des clients pilotes est le fait de s'il faudrait
-                insister que les clients ameners leurs partaines à commander chez Kdou.</p>
-        </article>
-        <article class="écrire">
-            <h3> Comment on a fait cette requête.</h3>
-            <p>  La requête compare le nombre de commandes de chaque pilote à celui de chacun de ses partenaires. Seuls les clients ayant au moins une commande sont conservés,
-                car sans commande le partenariat ne rapporte rien. Elle sert à juger si le partenariat est bénéfique.</p>
-        </article>
-    </section>
-</main>
+<div class="text penser">
+    <h2> Notre réflexion </h2>
+    <p>L'intéret de cette requête est de voir s'il y a des partenaires client qui commande autants
+        qui des clients pilotes est le fait de s'il faudrait  insister que les clients ameners leurs partaines à commander chez Kdou.</p>
+</div>
+<div class="text action">
+    <h2> Ce qu'on a fait</h2>
+    <p>La requête compare le nombre
+        de commandes de chaque pilote à celui de chacun de ses partenaires. Seuls les clients ayant au moins une commande sont conservés,
+        car sans commande le partenariat ne rapporte rien. Elle sert à juger si le partenariat est bénéfique.</p>
+</div>
+
+<div class="code">
+<pre><code><span class="fontions">SELECT</span>
+    C1.Contact <span class="fontions">AS</span> Client,
+    Cclient.NB <span class="fontions">AS</span> Client_commande,
+    C2.Contact <span class="fontions">AS</span> Partenaire,
+    Cpartenaire.NB <span class="fontions">AS</span> Partenaire_commande
+<span class="fontions">FROM</span> (
+    (
+        Clientele <span class="fontions">AS</span> C1
+        <span class="fontions">INNER JOIN</span> Clientele <span class="fontions">AS</span> C2 <span class="fontions">ON</span> C1.CodeCli = C2.CodeCliPart
+    )
+    <span class="fontions">INNER JOIN</span> (
+        <span class="fontions">SELECT</span> C.CodeCli, <span class="chiffre">COUNT</span>(C.[N° commande]) <span class="fontions">AS</span> NB
+        <span class="fontions">FROM</span> Commande <span class="fontions">AS</span> C
+        <span class="fontions">GROUP BY</span> C.CodeCli
+    ) <span class="fontions">AS</span> Cclient <span class="fontions">ON</span> C1.CodeCli = Cclient.CodeCli
+)
+<span class="fontions">INNER JOIN</span> (
+    <span class="fontions">SELECT</span> C.CodeCli, <span class="chiffre">COUNT</span>(C.[N° commande]) <span class="fontions">AS</span> NB
+    <span class="fontions">FROM</span> Commande <span class="fontions">AS</span> C
+    <span class="fontions">GROUP BY</span> C.CodeCli
+) <span class="fontions">AS</span> Cpartenaire <span class="fontions">ON</span> C2.CodeCli = Cpartenaire.CodeCli
+<span class="fontions">WHERE</span>
+    Cpartenaire.NB = Cclient.NB
+<span class="fontions">ORDER BY</span>
+    C1.Contact;</code></pre>
+</div>
+
+<div class="tableau">
+    <table>
+        <caption> Résultat de notre résultat </caption>
+        <thead>
+        <tr>
+            <th scope="col">Client</th>
+            <th scope="col">Client_commande</th>
+            <th scope="col">Partenaire</th>
+            <th scope="col">Partenaire_commande</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Gus Kerba</td>
+            <td>17</td>
+            <td>Isabelle Tricote</td>
+            <td>17</td>
+        </tbody>
+    </table>
+</div>
+
 <footer>
-    <p> Rapport 2026 Base de données Kdou par Aymeryck Thomas Jimmy et Gabriel</p>
+    <p> Rapport de la SAE Base de données 2026 fait par Aymeryck Thomas Jimmy et Gabriel</p>
 </footer>
+
+
 </body>
 </html>

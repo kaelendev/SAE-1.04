@@ -2,57 +2,130 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <title>Requête 2</title>
+    <link rel="stylesheet" href="assets/css/css.css">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>Title</title>
 </head>
 <body>
+    <header>
+        <h1> Rêquete 3 :</h1>
+        <p> Dans une réflexion en lien avec la santé : On veut comme indicateur le chiffre d’affaire
+            généré (montant total des ventes) annuel pour les catégories desserts ou boissons?</p>
+    </header>
+    <nav>
+        <input type="checkbox" id="liste">
+        <label class="menu" for="liste">☰ </label>
+        <div class="sidebar">
+            <label class="menu-fermer" for="liste">&times;</label>
+            <ul>
+                <li> <h4> Page principale</h4></li>
+                <li> <a href="index.html"> Page d'accueil</a></li>
+                <li> <h4> Requêtes Kdou</h4> </li>
+                <li> <a href="Requête2.html"> Requête 2 </a></li>
+                <li> <a href="Requête4.html"> Requête 4 </a></li>
+                <li> <a href="Requête5.html"> Requête 5 </a></li>
+                <li><h4> Requêtes personnelles pour Kdou</h4></li>
+                <li> <a href="Requête_perso_Aymeryck.html"> Requête perso Aymeryck </a></li>
+            </ul>
 
-<header>
-    <h1> Requête 3 : </h1>
-    <p>  Dans une réflexion en lien avec la santé : On veut comme indicateur le chiffre d’affaires
-        généré (montant total des ventes) annuel pour les catégories desserts ou boissons. </p>
-</header>
-<nav>
-    <input type="checkbox" id="liste">
-    <label class="menu" for="liste">☰ </label>
-    <div class="sidebar">
-        <label class="menu-fermer" for="liste">&times;</label>
-        <ul>
-            <li> <h4> Page principale</h4></li>
-            <li> <a href="index.html"> Page d'accueil</a></li>
-            <li> <h4> Requêtes Kdou</h4> </li>
-            <li> <a href="Requête2.html"> Requête 2 </a></li>
-            <li> <a href="Requête4.html"> Requête 4 </a></li>
-            <li> <a href="Requête5.html"> Requête 5 </a></li>
-            <li><h4> Requêtes personnelles pour Kdou</h4></li>
-            <li> <a href="Requête_perso_Aymeryck.html"> Requête perso Aymeryck </a></li>
-        </ul>
+        </div>
+    </nav>
+        <div class="text penser">
+            <h2> Notre réflexion </h2>
+            <p>L'intérêt de voir le CA annuel des desserts ou boissons est de repérer les produits mauvais
+                pour la santé consommés de manière régulière et en grandes quantités, afin d'agir en fonction
+                des caractéristiques des produits.</p>
+        </div>
+        <div class="text action">
+            <h2> Ce qu'on a fait</h2>
+            <p>La requête classe, année par année, les produits par chiffre d'affaires décroissant,
+                avec leur fournisseur et la quantité vendue.
+                Cela permet de surveiller la santé des clients et de cibler les fournisseurs à auditer.</p>
+        </div>
 
+    <div class="code">
+    <pre><code><span class="fontions">SELECT</span>
+    <span class="chiffre">YEAR(Co.DateCde)</span> <span class="fontions">AS</span> Années,
+    F.Societe,
+    P.NomProd,
+    <span class="chiffre">Round</span>(<span class="chiffre">sum</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> VENTE,
+    <span class="chiffre">Round</span>(<span class="chiffre">sum</span>(DC.Quantité), 2) <span class="fontions">AS</span> Quantité_vendues
+<span class="fontions">FROM</span>
+    (
+        (
+            (
+        Categorie <span class="fontions">AS</span> C
+                <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
+            )<span class="fontions">INNER JOIN</span> Fournisseur <span class="fontions">AS</span> F <span class="fontions">ON</span> P.NoFour = F.NoFour
+        )<span class="fontions">INNER JOIN</span> DetailCommande <span class="fontions">AS</span> DC <span class="fontions">ON</span> P.RefProd = DC.[Réf produit]
+    )<span class="fontions">INNER JOIN</span> Commande <span class="fontions">AS</span> Co <span class="fontions">ON</span> DC.[N° commande] = Co.[N° commande]
+<span class="fontions">WHERE</span>
+    C.NomCateg <span class="fontions">IN</span> ("Desserts", "Boissons")
+<span class="fontions">GROUP BY</span>
+    <span class="chiffre">YEAR(Co.DateCde)</span>,
+    F.Societe,
+    P.NomProd
+<span class="fontions">ORDER BY</span>
+    <span class="chiffre">YEAR(Co.DateCde)</span> <span class="fontions">DESC</span>,
+    4 <span class="fontions">DESC</span>;</code></pre>
     </div>
-</nav>
-<main>
-    <section>
-        <article class="image">
-            <img src="assets/image/Requête_3_code.png" alt="Code SQL" title="Code SQL">
-            <img src="assets/image/requête3_résultat.png" alt="Résultat" title="Résultat">
-        </article>
-        <article class="écrire">
-            <h3> Notre réflexion </h3>
-            <p> L'intérêt de voir le CA annuel des desserts ou boissons,
-                c'est de voir les produits qui sont mauvais pour la santé sont consommée par ses clients
-             de manières assez régulières et en grandes quantitées pour ainsi agir en fontion du produits <p>
-        </article>
-        <article class="écrire">
-            <h3> Comment on a fait cette requête.</h3>
-            <p> La requête classe, année par année, les produits par CA décroissant,
-                avec le fournisseur et la quantité vendue. Cela permet de repérer les produits les plus vendus à surveiller
-                pour la santé des clients, et les fournisseurs chez qui revoir les quantités commandées.</p>
-        </article>
-    </section>
-</main>
+
+    <div class="tableau">
+        <table>
+            <caption> Extrait de notre résultat </caption>
+            <thead>
+            <tr>
+            <th scope="col">Année</th>
+            <th scope="col">Société</th>
+            <th scope="col">Nom produit</th>
+            <th scope="col">Ventes </th>
+            <th scope="col">Quantité</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2022</td>
+                <td>Nordlicht Feinkost GmbH</td>
+                <td>NuNuCa Nuß-Nougat-Creme</td>
+                <td>952</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>2022</td>
+                <td>Coral Bay Delights Ltd.</td>
+                <td>Outback Lager</td>
+                <td>437,50</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>2021</td>
+                <td>Moines de Paris</td>
+                <td>Côte de Blaye</td>
+                <td>358 497,18</td>
+                <td>702</td>
+            </tr>
+            <tr>
+                <td>2021</td>
+                <td>TanteGreta Handelsgruppe AG</td>
+                <td>Rhönbräu Klosterbier</td>
+                <td>167 737,63</td>
+                <td>1270</td>
+            </tr>
+            <tr>
+                <td>2021</td>
+                <td>MakeaHerkkku Oy</td>
+                <td>Maxilaku</td>
+                <td>137 864,88</td>
+                <td>550</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 <footer>
-    <p> Rapport 2026 Base de données Kdou par Aymeryck Thomas Jimmy et Gabriel</p>
+    <p> Rapport de la SAE Base de données 2026 fait par Aymeryck Thomas Jimmy et Gabriel</p>
 </footer>
+
+
 </body>
 </html>

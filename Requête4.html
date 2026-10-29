@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <title>Requête 4</title>
+    <link rel="stylesheet" href="assets/css/css.css">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>Title</title>
 </head>
 <body>
-
 <header>
-    <h1> Requête 4 : </h1>
-    <p> Dans une réflexion en lien avec l’offre commerciale : Calcul de l’indicateur nombre de
-        produits carnés non commandés actuellement ?</p>
+    <h1> Rêquete 4 :</h1>
+    <p>Dans une réflexion en lien avec l’offre commerciale : Calcul de l’indicateur nombre de
+        produits carnés non commandés actuellement ? </p>
 </header>
 <nav>
     <input type="checkbox" id="liste">
@@ -31,70 +30,86 @@
 
     </div>
 </nav>
-<main>
-    <section>
-        <article class="image">
-           <pre>SELECT
+<div class="text penser">
+    <h2> Notre réflexion </h2>
+    <p>L'intérêt de voir si actuellement, il y a des viandes qui n'ont jamais été vendus, c'est de voir en un premier temps les produits
+        qui ne marchent pas et ainsi donc de voir les produits où il faudrait baisser le prix ou renégocier avec le fournisseur.</p>
+</div>
+<div class="text action">
+    <h2> Ce qu'on a fait</h2>
+    <p>La requête affiche ce nombre par rapport au nombre total de produits carnés au catalogue,
+        pour savoir si la viande se vend. Elle liste aussi les produits concernés, avec leur fournisseur et leur prix de vente,
+        afin de décider de baisser les prix ou d’arrêter de s’approvisionner chez eux.</p>
+</div>
+
+<div class="code">
+<pre><code><span class="fontions">SELECT</span>
     P.NomProd,
     F.Societe,
-    ROUND(P.CoutAchat * C.CoefMarge, 2) AS Prix,
-    (
-        SELECT
-            COUNT(*)
-        FROM
-            Produit AS P
-            INNER JOIN Categorie AS C ON P.CodeCateg = C.CodeCateg
-        WHERE
-            C.NomCateg = "Viandes"
-            AND P.RefProd NOT IN (
-                SELECT
-                    [Réf produit]
-                FROM
-                    DetailCommande
+    <span class="chiffre">ROUND</span>(P.CoutAchat * C.CoefMarge, 2) <span class="fontions">AS</span> Prix,
+    ( <span class="fontions">SELECT</span> <span class="chiffre">COUNT(*)</span>
+        <span class="fontions">FROM</span> Produit <span class="fontions">AS</span> P
+            <span class="fontions">INNER JOIN</span> Categorie <span class="fontions">AS</span> C <span class="fontions">ON</span> P.CodeCateg = C.CodeCateg
+        <span class="fontions">WHERE</span> C.NomCateg = "Viandes"
+            <span class="fontions">AND</span> P.RefProd <span class="fontions">NOT IN</span> (
+                <span class="fontions">SELECT</span> DetailCommande.[Réf produit]
+                <span class="fontions">FROM</span> DetailCommande
             )
-    ) AS Nombres_non_vendus,
-    (
-        SELECT
-            COUNT(*)
-        FROM
-            Produit AS P
-            INNER JOIN Categorie AS C ON P.CodeCateg = C.CodeCateg
-        WHERE
-            C.NomCateg = "Viandes"
-    ) AS Nombres_total
-FROM
-    (
-        Categorie AS C
-        INNER JOIN Produit AS P ON C.CodeCateg = P.CodeCateg
-    )
-    INNER JOIN Fournisseur AS F ON P.NoFour = F.NoFour
-WHERE
+    ) <span class="fontions">AS</span> Nombres_non_vendus,
+    ( <span class="fontions">SELECT</span> <span class="chiffre">COUNT(*)</span>
+        <span class="fontions">FROM</span> Produit <span class="fontions">AS</span> P
+            <span class="fontions">INNER JOIN</span> Categorie <span class="fontions">AS</span> C <span class="fontions">ON</span> P.CodeCateg = C.CodeCateg
+        <span class="fontions">WHERE</span> C.NomCateg = "Viandes"
+    ) <span class="fontions">AS</span> Nombres_total
+<span class="fontions">FROM</span> (
+    Categorie <span class="fontions">AS</span> C
+    <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
+)
+<span class="fontions">INNER JOIN</span> Fournisseur <span class="fontions">AS</span> F <span class="fontions">ON</span> P.NoFour = F.NoFour
+<span class="fontions">WHERE</span>
     C.NomCateg = "Viandes"
-    AND P.RefProd NOT IN (
-        SELECT
-            [Réf produit]
-        FROM
-            DetailCommande
+    <span class="fontions">AND</span> P.RefProd <span class="fontions">NOT IN</span> (
+        <span class="fontions">SELECT</span> DetailCommande.[Réf produit]
+        <span class="fontions">FROM</span> DetailCommande
     )
-ORDER BY
-    P.NomProd;</pre>
-            <img src="assets/image/requête4_résultat.png" alt="Résultat" title="Résultat">
-        </article>
-        <article class="écrire">
-            <h3> Notre réflexion </h3>
-            <p> L'intérêt de voir si actuellement, il y a des viandes qui n'ont jamais été vendus, c'est de voir en un premier temps les produits qui ne marchent pas
-            et ainsi donc de voir les produits où il faudrait baisser le prix ou renégocier avec le fournisseur.</p>
-        </article>
-        <article class="écrire">
-            <h3> Comment on a fait cette requête.</h3>
-            <p> La requête affiche le nombre de produits carnés jamais vendus par rapport au nombre total de produits carnés au catalogue,
-                pour savoir si la viande se vend. Elle liste aussi les produits concernés, avec leur fournisseur et leur prix de vente,
-                afin de décider de baisser les prix ou d’arrêter de s’approvisionner chez eux.</p>
-        </article>
-    </section>
-</main>
+<span class="fontions">ORDER BY</span>
+    P.NomProd;</code></pre>
+</div>
+
+<div class="tableau">
+    <table>
+        <caption> Extrait de notre résultat </caption>
+        <thead>
+        <tr>
+            <th scope="col">Nom produit</th>
+            <th scope="col">Société</th>
+            <th scope="col">Prix</th>
+            <th scope="col"> Nombres_non_vendus</th>
+            <th scope="col">Nombres_total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Paté de Campagne au Pommeau</td>
+            <td>Moines de Paris</td>
+            <td>53,38</td>
+            <td>2</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>Terrine Andouilloux</td>
+            <td>EthnicFood France</td>
+            <td>46,38</td>
+            <td>2</td>
+            <td>8</td>
+        </tr>
+    </table>
+</div>
+
 <footer>
-    <p> Rapport 2026 Base de données Kdou par Aymeryck Thomas Jimmy et Gabriel</p>
+    <p> Rapport de la SAE Base de données 2026 fait par Aymeryck Thomas Jimmy et Gabriel</p>
 </footer>
+
+
 </body>
 </html>
