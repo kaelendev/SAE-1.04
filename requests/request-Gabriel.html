@@ -2,15 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="assets/css/css.css">
+    <link rel="stylesheet" href="../../assets/css/css.css">
     <meta name="viewport" content="width=device-width initial-scale=1">
     <title>Title</title>
 </head>
 <body>
 <header>
-    <h1> Rêquete 2 :</h1>
-    <p>  Dans une réflexion en lien avec l’origine de ses produits : On veut comme indicateur le CA
-        total généré à ce jour avec les fournisseurs de l’UE ?</p>
+    <h1> Rêquete perso Aymeryck:</h1>
 </header>
 <nav>
     <input type="checkbox" id="liste">
@@ -18,45 +16,50 @@
     <div class="sidebar">
         <label class="menu-fermer" for="liste">&times;</label>
         <ul>
-            <li> <h4> Page principale</h4></li>
-            <li> <a href="index.html"> Page d'accueil</a></li>
-            <li> <h4> Requêtes Kdou</h4> </li>
-              <li> <a href="Requête1).html"> Requête 1) </a></li>
-            <li> <a href="Requête2.html"> Requête 2  </a></li>
-            <li> <a href="Requête3.html"> Requête 3 </a></li>
-            <li> <a href="Requête5.html"> Requête 4 </a> </li>
-            <li> <a href="Requête5.html"> Requête 5 </a></li>
+            <li> <h3> Page principale</h3></li>
+            <li> <a href="../index.html"> Page d'accueil</a></li>
+            <li> <h3> Requêtes Kdou</h3> </li>
+             <li> <a href="./request1.html"> Requête 1)  </a></li>
+             <li> <a href="./request1-a.html"> Requête 1a)  </a></li>
+            <li> <a href="./request2.html"> Requête 2  </a></li>
+            <li> <a href="./request3.html"> Requête 3 </a></li>
+            <li> <a href="./request5.html"> Requête 4 </a> </li>
+            <li> <a href="./request5.html"> Requête 5 </a></li>
             <li><h3> Requêtes personnelles pour Kdou</h3></li>
-            <li> <a href="Requête_perso_Aymeryck.html"> Requête perso Aymeryck </a></li>
-            <li> <a href="Requête_perso_Thomas.html"> Requête perso Thomas</a> </li>
-            <li> <a href="Requête_perso_Jimmy.html"> Requête perso Jimmy</a></li>
-            <li> <a href="Requête_perso_Gabriel.html"> Requête perso Gabriel</a></li>
+            <li> <a href="./request-Jimmy.html"> Requête perso Jimmy </a></li>
+            <li> <a href="./request-Thomas.html"> Requête perso Thomas</a></li>
+            <li> <a href="./request-Gabriel.html"> Requête perso Gabriel</a></li>
         </ul>
 
     </div>
 </nav>
+
 <div class="text penser">
-    <h2> Notre réflexion </h2>
-    <p>L'intérêt d'analyser le CA des produits issus de fournisseurs de l'UE est de repérer les produits les plus rentables pour KDou.
-        Cela permet également d'identifier les fournisseurs avec lesquels maintenir de bonnes relations et ceux avec qui des ajustements sont nécessaires.
+    <h2> Ma réflexion </h2>
+    <p>Pour mon indicateur personnel j’ai voulu ...
     </p>
 </div>
 <div class="text action">
-    <h2> Ce qu'on a fait</h2>
-    <p>Pour faire cette requête on a fait des jointures entre les tables categories, produit, fournisseur, details commande et pays 
-        Où on a fait une sélection où on prennais seulement les membres de l'UE et on les a regroupé par fournisseur,produit et pays d'origine.
-        Puis on les a trié sur les plus grande vente faite. Enfin, il a juste fallu afficher les société des fournisseur, le nom du produit et du pays
-        et de faire la somme des ventes grâce aux calcule quantité venue fois cout d'achat fois le coefficient de marge fois la remise. Ainsi, on les 
-    les produit les plus vendues en premiers. On a aussi mis la marge que Kdou avait avec ces produit comme cela on a l'origine des produit de Kdou qui
-    se vent le plus et la marge pour voir si Kdou peut faire des changement sur certains produits sans être en déficite. 
-    </p>
+    <h2> Comment cela à été réalisé</h2>
+    <p>Pour cela ...</p>
 </div>
 
 <div class="code">
-<pre><code><span class="fontions">SELECT</span>
-    F.Societe,
-    P.NomProd,
-    Pa.PaysFR,
+    
+</div>
+
+
+<div class="tableau">
+    <p>Tableau ou Image du résultat</p>
+</div>
+
+<footer>
+    <p> Rapport de la SAE Base de données 2026 fait par Aymeryck Thomas Jimmy et Gabriel</p>
+</footer>
+
+
+</body>
+</html>PaysFR,
     <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> VENTE,
     <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * (C.CoefMarge * (1 - DC.[Remise (%)]) - 1)), 2) <span class="fontions">AS</span> Marge
 <span class="fontions">FROM</span> Categorie <span class="fontions">AS</span> C
