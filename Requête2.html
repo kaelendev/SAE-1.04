@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/css.css">
@@ -38,8 +38,13 @@
 </div>
 <div class="text action">
     <h2> Ce qu'on a fait</h2>
-    <p>La requête détaille ce CA par produit et par fournisseur, avec le pays d’origine et la marge générée par KDou,
-        classés du plus gros CA au plus petit, afin de repérer les fournisseurs dont les produits rapportent le plus</p>
+    <p>Pour faire cette requête on a fait des jointures entre les tables categories, produit, fournisseur, details commande et pays 
+        Où on a fait une sélection où on prennais seulement les membres de l'UE et on les a regroupé par fournisseur,produit et pays d'origine.
+        Puis on les a trié sur les plus grande vente faite. Enfin, il a juste fallu afficher les société des fournisseur, le nom du produit et du pays
+        et de faire la somme des ventes grâce aux calcule quantité venue fois cout d'achat fois le coefficient de marge fois la remise. Ainsi, on les 
+    les produit les plus vendues en premiers. On a aussi mis la marge que Kdou avait avec ces produit comme cela on a l'origine des produit de Kdou qui
+    se vent le plus et la marge pour voir si Kdou peut faire des changement sur certains produits sans être en déficite. 
+    </p>
 </div>
 
 <div class="code">
@@ -47,8 +52,8 @@
     F.Societe,
     P.NomProd,
     Pa.PaysFR,
-    <span class="fontions">ROUND</span>(<span class="fontions">SUM</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> VENTE,
-    <span class="fontions">ROUND</span>(<span class="fontions">SUM</span>(DC.Quantité * P.CoutAchat * (C.CoefMarge * (1 - DC.[Remise (%)]) - 1)), 2) <span class="fontions">AS</span> Marge
+    <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> VENTE,
+    <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * (C.CoefMarge * (1 - DC.[Remise (%)]) - 1)), 2) <span class="fontions">AS</span> Marge
 <span class="fontions">FROM</span> Categorie <span class="fontions">AS</span> C
     <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
     <span class="fontions">INNER JOIN</span> Fournisseur <span class="fontions">AS</span> F <span class="fontions">ON</span> P.NoFour = F.NoFour

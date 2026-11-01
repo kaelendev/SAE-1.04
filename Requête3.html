@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/css.css">
@@ -38,9 +38,20 @@
         </div>
         <div class="text action">
             <h2> Ce qu'on a fait</h2>
-            <p>La requête classe, année par année, les produits par chiffre d'affaires décroissant,
-                avec leur fournisseur et la quantité vendue.
-                Cela permet de surveiller la santé des clients et de cibler les fournisseurs à auditer.</p>
+            <p>Pour faire la requête, il fallait faire unejointure avec la table Catégorie pour sélectionner les desserts ou les boissons et avoir le
+            coefficient de marge du produit,puis la joindre à la table Produits afin d’avoir le nom du
+            produit et son coût puis la joindre faire joindre à la table fournisseurs pour avoir les noms des
+            fournisseurs, puis à la table détail commande pour les quantités de produits
+            commandées et les remises enfin j’ai joint la table commande pour trier par année.
+            Après cela, on a regroupé par année, nom de produit et fournisseur. Et enfin, on a trié en
+            décroissant par années et par la somme faite durant l’année (qui a été fait par la
+            fonction SUM et round afin de conserver deux chiffres à la fin). Ainsi on la valeur du
+            chiffre d’affaires avec le nom du produit et du fournisseurs. L’idée est de voir quel
+            produit se vend le mieux (la quantité permet de donner une visualisation de cela) et de
+            voir si le produit pourrait être nocif pour la santé et si on juge que oui on sait directement
+            quel fournisseur appeler pour revoir le problème ou quel produit il faut réduire la mise
+            en vente
+            </p>
         </div>
 
     <div class="code">

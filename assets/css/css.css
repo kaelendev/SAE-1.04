@@ -56,7 +56,6 @@ header p {
 }
 #liste:checked~.sidebar{
     display:flex;
-
 }
 .sidebar {
     display:none;
@@ -64,7 +63,7 @@ header p {
     right: 0;
     top: 0;
     height: 100%;
-    padding: 1rem;
+    padding: 0.4rem;
     position: fixed;
     z-index: 100;
     background-color: var(--color-autre);

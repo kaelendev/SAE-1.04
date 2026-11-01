@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/css.css">
@@ -37,9 +37,14 @@
 </div>
 <div class="text action">
     <h2> Ce qu'on a fait</h2>
-    <p>La requête affiche ce nombre par rapport au nombre total de produits carnés au catalogue,
-        pour savoir si la viande se vend. Elle liste aussi les produits concernés, avec leur fournisseur et leur prix de vente,
-        afin de décider de baisser les prix ou d’arrêter de s’approvisionner chez eux.</p>
+    <p>Pour faire cette requête on a d'abord jointe les tables Catégories,Produits et Fournisseurs entre elle.
+        Puis, nous avons fait une sélection où on a pris les catégories viandes qui n'avait pas de ref produit pour trouver les viandes non vendues.
+        Ainsi, on a trié par nom de produit et décidé d'afficher le nom du produit, la société du fournisseur, le prix du produit arrondie à 2 pour des raisons d'affichage.
+        Puis faire une sous requête, qui est dédiée au comptage du nombre de produit de catégorie viande qui n'a pas était vendue.
+        Et enfin une autre sous requête qui compte tout le produit de catégorie viandes. Comme cela on peut voir facilement combien de viandes
+        n'est pas vendue par rapport aux nombres totale de viandes et si on vu qu'il y a un écart trop important s'intérroger sur baisser le prix 
+        de vente de ces viandes.
+    </p>
 </div>
 
 <div class="code">

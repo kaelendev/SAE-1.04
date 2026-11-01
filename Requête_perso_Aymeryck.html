@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/css.css">
@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-    <h1> Rêquete perso :</h1>
+    <h1> Rêquete perso Aymeryck:</h1>
 </header>
 <nav>
     <input type="checkbox" id="liste">
@@ -19,8 +19,7 @@
             <li> <h3> Page principale</h3></li>
             <li> <a href="index.html"> Page d'accueil</a></li>
             <li> <h3> Requêtes Kdou</h3> </li>
-            <li> <a href="Requête2.html"> Requête 2 (Le CA
-                total avec les fournisseurs de l’UE ?) </a></li>
+            <li> <a href="Requête2.html"> Requête 2  </a></li>
             <li> <a href="Requête3.html"> Requête 3 </a></li>
             <li> <a href="Requête5.html"> Requête 5 </a></li>
             <li><h3> Requêtes personnelles pour Kdou</h3></li>
@@ -31,17 +30,23 @@
 </nav>
 
 <div class="text penser">
-    <h2> Notre réflexion </h2>
-    <p>L'intérêt de cette requête est que KDou est une entreprise qui doit gérer ses stocks le maximun possible.
-        Pour cela, il faut mieux connaitre ses clients et leurs habitudes de commandes, c'est pour cela que de voir annuellement
-        ce qu'il commande est bien pour estimer une certaine quantitée de produits à stocker.
+    <h2> Ma réflexion </h2>
+    <p>Pour mon indicateur personnel j’ai voulu voir la quantité de produit que les clients
+commandent annuellement afin que Kdou évite de trop commander et de se retrouver
+avec des produits qui sont périmés et donc un gâchis de nourritures.
+ Cela permet ainsi à Kdou de devenir un peu plus éco-responsable tout en faisant attention à leurs commandes
     </p>
 </div>
 <div class="text action">
-    <h2> Ce qu'on a fait</h2>
-    <p>Les produits les plus commandés par année, avec le nombre de commandes et la quantité moyenne par commande,
-        mise à côté du stock actuel. Cela permet de repérer les produits pour lesquels KDou doit prévoir un stock plus important ou pour passer
-        commande.</p>
+    <h2> Comment cela à été réalisé</h2>
+    <p>Pour cela j’ai pris la table Fournisseur pour avoir l’origine du produit assez facilement, puis je l’ai jointe à la
+        table Produit pour avoir le nom du produit et sa quantité en stock actuellement, puis je
+        l’ai joint à la table détail commande pour faire les sommes des quantités commandés et
+        d’avoir la quantité moyenne commandée puis j’ai joint la table commande pour avoir le
+        nombre de commandes faites. Puis, j’ai regroupé par nom de fournisseur et de produit,
+        la quantité en stock et années et enfin, j’ai trié en décroissant l’années et la quantité de
+        produit commandés afin d’avoir les années les plus récentes, puis les produits les plus
+        commandés pour que Krou puisse s’adapter aux besoins.</p>
 </div>
 
 <div class="code">
