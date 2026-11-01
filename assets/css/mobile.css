@@ -1,0 +1,16 @@
+@media (max-width: 768px) {
+    main {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        max-width: 90vw;
+        padding: 10px;
+
+        justify-content: center;
+    }
+
+    .text {
+        width: 80vw;
+    }
+
+}

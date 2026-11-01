@@ -1,0 +1,129 @@
+@import url("./vars.css");
+
+
+#liste{
+    display:none;
+    cursor: pointer;
+}
+
+.menu{
+    grid-area: nav;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 30px;
+
+    cursor:pointer;
+}
+
+#liste:checked~.sidebar{
+    display:flex;
+    
+}
+
+.sidebar {
+    display:none;
+    width:33%;
+    height: 100%;
+
+    right: 0;
+    top: 0;
+    
+    padding: 0.5rem;
+    position: fixed;
+
+    z-index: 100;
+    background-color: var(--color-autre);
+
+    border-radius: 12px 0 12px 0;
+    box-shadow: black 10px 10px 10px 10px;
+    
+}
+
+.menu-fermer{
+    position:fixed;
+    right:5px;
+    top:5px;
+    font-size:35px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.sidebar ul{
+    width:100%;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+    line-height: 2rem;
+    padding:10px 10px;
+
+    background-color: var(--color-principale);
+    box-shadow: 0 2px 3px var(--color-box-shadow);
+    overflow-y: auto;
+    
+
+    border-radius: 12px;
+    overflow-x: hidden;
+}
+
+.sidebar a{
+    color:var(--color-a);
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.current > a{
+    color: var(--color-a-current);
+    text-decoration: dashed;
+}
+
+
+
+.sidebar a:hover {
+    color: var(--color-border);
+}
+
+.current > a:hover{
+    color: var(--color-a-current);
+    text-decoration: dashed;
+}
+
+.text {
+    background-color: var(--color-principale);
+    padding: 1.3rem;
+    border-left: 5px solid var( --color-secondaire-border);
+    box-shadow: 4px 6px var(--color-box-shadow);
+
+    width: 100%;
+    border-radius: 12px;
+}
+
+
+.penser {
+    grid-area: reflexion;;
+ }
+
+.action {
+    grid-area: maniere;
+}
+
+.code{
+    grid-area:code;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+
+.fontions {
+    color: var(--color-fontions);
+    font-weight: bold;
+}
+.chiffre {
+    color:var(--color-chiffre);
+}
+.tableau{
+    grid-area:tableau;
+    overflow-x:auto;
+    width:100%;
+}
