@@ -21,11 +21,16 @@
                 <li> <h4> Page principale</h4></li>
                 <li> <a href="index.html"> Page d'accueil</a></li>
                 <li> <h4> Requêtes Kdou</h4> </li>
-                <li> <a href="Requête2.html"> Requête 2 </a></li>
-                <li> <a href="Requête4.html"> Requête 4 </a></li>
-                <li> <a href="Requête5.html"> Requête 5 </a></li>
-                <li><h4> Requêtes personnelles pour Kdou</h4></li>
-                <li> <a href="Requête_perso_Aymeryck.html"> Requête perso Aymeryck </a></li>
+                <li> <a href="Requête1).html"> Requête 1) </a></li>
+                <li> <a href="Requête1a).html"> Requête1a)</a></li>
+            <li> <a href="Requête2.html"> Requête 2  </a></li>
+            <li> <a href="Requête5.html"> Requête 4 </a> </li>
+            <li> <a href="Requête5.html"> Requête 5 </a></li>
+            <li><h3> Requêtes personnelles pour Kdou</h3></li>
+            <li> <a href="Requête_perso_Aymeryck.html"> Requête perso Aymeryck </a></li>
+            <li> <a href="Requête_perso_Thomas.html"> Requête perso Thomas</a> </li>
+            <li> <a href="Requête_perso_Jimmy.html"> Requête perso Jimmy</a></li>
+            <li> <a href="Requête_perso_Gabriel.html"> Requête perso Gabriel</a></li>
             </ul>
 
         </div>
@@ -56,7 +61,7 @@
 
     <div class="code">
     <pre><code><span class="fontions">SELECT</span>
-    <span class="chiffre">YEAR(Co.DateCde)</span> <span class="fontions">AS</span> Années,
+    <span class="chiffre">YEAR</span>(Co.DateCde) <span class="fontions">AS</span> Années,
     F.Societe,
     P.NomProd,
     <span class="chiffre">Round</span>(<span class="chiffre">sum</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> VENTE,
@@ -73,11 +78,11 @@
 <span class="fontions">WHERE</span>
     C.NomCateg <span class="fontions">IN</span> ("Desserts", "Boissons")
 <span class="fontions">GROUP BY</span>
-    <span class="chiffre">YEAR(Co.DateCde)</span>,
+    <span class="chiffre">YEAR </span>(Co.DateCde),
     F.Societe,
     P.NomProd
 <span class="fontions">ORDER BY</span>
-    <span class="chiffre">YEAR(Co.DateCde)</span> <span class="fontions">DESC</span>,
+    <span class="chiffre">YEAR</span>(Co.DateCde) <span class="fontions">DESC</span>,
     4 <span class="fontions">DESC</span>;</code></pre>
     </div>
 

@@ -63,11 +63,10 @@ header p {
     right: 0;
     top: 0;
     height: 100%;
-    padding: 0.4rem;
+    padding: 0.5rem;
     position: fixed;
     z-index: 100;
     background-color: var(--color-autre);
-    line-height: 1;
 }
 .menu-fermer{
     position:fixed;
@@ -78,15 +77,16 @@ header p {
 }
 
 .sidebar ul{
-    width:95%;
+    width:85%;
     list-style-type: none;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 7px;
     line-height: 2rem;
     padding:10px 10px;
     background-color: var(--color-principale);
     box-shadow: 0 2px 3px var(--color-box-shadow);
+    overflow-y: auto;
 }
 
 .sidebar a{
@@ -137,7 +137,7 @@ pre{
 }
 table{
     border-collapse:collapse;
-    border:1px solid var(--color-border);
+    border:1px solid var(--color-text);
     text-align: center;
     height: auto;
 }
