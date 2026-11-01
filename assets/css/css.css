@@ -3,17 +3,18 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--color-principale);
+    background-color: var(--color-bg);
     color: var(--color-text);
 
     margin: 0;
     padding: 0;
 
-    min-height: 100vh;
+    
     max-width: 100vw;
 
     display:flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
 main {
@@ -29,10 +30,11 @@ main {
         "tableau tableau";
 
     width: 100%;
-    height: 80vh;
+    max-height: 80vh;
 
     padding: 15px;
     gap:60px;
+    
 }
 
 
@@ -49,10 +51,14 @@ header{
     background-color: var(--color-header);
     border-bottom:5px solid var(--color-border);
     text-align:center;
-    grid-area:header;
+
 }
+
 header p {
-    font-size:1.3rem;
+    font-size:1rem;
+    font-family: monospace;
+    padding: 5px;
+    
 }
 
 h3 {
@@ -73,7 +79,7 @@ h1 {
 
 
 
-pre{
+pre {
     background-color: var(--color-pre-background);
     border-radius: 10px;
     color:var(--color-pre);
@@ -103,7 +109,7 @@ tr:nth-child(even) {
 }
 
 footer {
-
+    position: sticky;
     grid-area: footer;
     width: 100%;
     box-sizing: border-box;
@@ -113,5 +119,5 @@ footer {
     padding: 1rem;
     background-color: var(--color-autre);
     
-    margin-top: 10vh;
+    margin-top: 100%;
 }
