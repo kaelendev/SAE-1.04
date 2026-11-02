@@ -2,13 +2,13 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="C:\Users\Jeune\Downloads\Nouveau dossier\SAE-1.04\assets\css\css.css">
     <meta name="viewport" content="width=device-width initial-scale=1">
     <title>Title</title>
 </head>
 <body>
 <header>
-    <h1> Rêquete perso Aymeryck:</h1>
+    <h1> Rêquete perso Gabriel:</h1>
 </header>
 
 <aside>
@@ -22,7 +22,7 @@
             <li> <a href="../index.html"> Page d'accueil</a></li>
             <li> <h3> Requêtes Kdou</h3> </li>
             <li> <a href="./request1.html"> Requête 1)  </a></li>
-            <li> <a href="./request1-a.html"> Requête 1a)  </a></li>
+            <li> <a href="./request1h.html"> Requête 1h  </a></li>
             <li> <a href="./request2.html"> Requête 2  </a></li>
             <li> <a href="./request3.html"> Requête 3 </a></li>
             <li> <a href="./request4.html"> Requête 4 </a> </li>
@@ -42,21 +42,77 @@
 
 <div class="text penser">
     <h2> Ma réflexion </h2>
-    <p>Pour mon indicateur personnel j’ai voulu ...
+    <p>Pour mon indicateur personnel j’ai voulu savoir où se trouvais les principaux fournisseur
+         de Kdou qui font son chiffres d'affaires cela permetteris à l'entreprise si les fournisseur 
+         hors de France sont intéressant pour faire des patenariats
     </p>
 </div>
 <div class="text action">
     <h2> Comment cela à été réalisé</h2>
-    <p>Pour cela ...</p>
+    <p>Pour cela, j'ai fait une jointure entre les tables produit, détails commandes, catégories, fournisseur et pays. Et puis, j'ai regroupé grâce un double IIf.
+        Si le pays du fournisseur est la France on regroupe entre Français, sinon si il fait partie de l'union européenne on l'associe avec les autre membres de 
+        l'union euro^é et si non encore on les regroupes dans la zone no UE. Et puis on fait la somme du chiffres d'affaires des fournisseurs et on fait la somme de la
+        quantité de produits vendues pour pouvoir comparer les différents groupes facilement
+    </p>
 </div>
 
 <div class="code">
+    <pre>
+        <code>
+          <span class="fontions"> SELECT</span> 
+    <span class="fontions"> IIf</span>(
+        pa.PaysFR = "France",
+        "France",
+         <span class="chiffre"> Iif</span>(pa.UE = True, "Union européenne", "Hors UE")
+    )  <span class="fonctions"> AS </span>[Zobe de provenance],
+    <span class="chiffre"> Sum</span>(d.Quantité * p.CoutAchat * c.CoefMarge) AS [CA zone],
+     <span class="chiffre"> Sum</span>(d.Quantité) AS [Unités vendues]
+ <span class="fontions"> FROM</span>
+    (
+        (
+            (
+                DetailCommande  <span class="fontions"> AS</span> d
+                 <span class="fontions">INNER JOIN</span> Produit <span class="fonctions">AS</span> p  <span class="fontions"> ON</span> d.[Réf produit] = p.RefProd
+            )
+             <span class="fontions"> INNER JOIN</span> Categorie  <span class="fontions"> AS</span> c <span class="fonctions"> ON</span> p.CodeCateg = c.CodeCateg
+        )
+         <span class="fontions"> INNER JOIN Fournisseur  <span class="fontions"> AS </span>f <span class="fonctions">ON</span> p.NoFour = f.NoFour
+    )
+     <span class="fontions"> INNER JOIN </span>Pays  <span class="fontions"> AS</span> pa <span class="fonctions">ON</span> f.NoFour = pa.NoPays
+ <span class="fontions"> GROUP BY</span>
+    <span class="chiffre"> IIf</span>(
+        pa.PaysFR = "France",
+        "France",
+         <span class="chiffre"> Iif</span>(pa.UE = True, "Union européenne", "Hors UE")
+    );
+    </code>
+</pre>
     
 </div>
 
 
 <div class="tableau">
-    <p>Tableau ou Image du résultat</p>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Zone de provenance</th>
+                <th scope="col"> CA zone</th>
+                <th scope="col">Unités vendues </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>France </td>
+                <td>111907,5</td>
+                <td>694 </td>
+            </tr>
+            <tr>
+                <td> Union européenne</td>
+                <td> 3747368,25</td>
+                <td> 53255 </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 </main>
 
