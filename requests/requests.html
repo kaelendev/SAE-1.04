@@ -65,20 +65,20 @@
 
 
 <div class="code">
-<pre><code><span class="fontions">SELECT</span>
+<pre><code><span class="keyword">SELECT</span>
     F.*
-<span class="fontions">FROM</span> Fournisseur <span class="fontions">AS</span> F
-<span class="fontions">WHERE</span> F.NoFour <span class="fontions">IN</span> (
-        <span class="fontions">SELECT</span> P.NoFour
-        <span class="fontions">FROM</span> Produit <span class="fontions">AS</span> P
-            <span class="fontions">INNER JOIN</span> Categorie <span class="fontions">ON</span> Categorie.CodeCateg = P.CodeCateg
-        <span class="fontions">WHERE</span> Categorie.NomCateg <span class="fontions">LIKE</span> "*Poisson*")
-    <span class="fontions">AND</span> F.NoFour <span class="fontions">IN</span> (
-        <span class="fontions">SELECT</span> P.NoFour
-        <span class="fontions">FROM</span> Produit <span class="fontions">AS</span> P
-            <span class="fontions">INNER JOIN</span> Categorie <span class="fontions">ON</span> Categorie.CodeCateg = P.CodeCateg
-        <span class="fontions">WHERE</span> Categorie.NomCateg <span class="fontions">LIKE</span> "*Viande*" )
-<span class="fontions">ORDER BY</span>
+<span class="keyword">FROM</span> Fournisseur <span class="keyword">AS</span> F
+<span class="keyword">WHERE</span> F.NoFour <span class="keyword">IN</span> (
+        <span class="keyword">SELECT</span> P.NoFour
+        <span class="keyword">FROM</span> Produit <span class="keyword">AS</span> P
+            <span class="keyword">INNER JOIN</span> Categorie <span class="keyword">ON</span> Categorie.CodeCateg = P.CodeCateg
+        <span class="keyword">WHERE</span> Categorie.NomCateg <span class="keyword">LIKE</span> "*Poisson*")
+    <span class="keyword">AND</span> F.NoFour <span class="keyword">IN</span> (
+        <span class="keyword">SELECT</span> P.NoFour
+        <span class="keyword">FROM</span> Produit <span class="keyword">AS</span> P
+            <span class="keyword">INNER JOIN</span> Categorie <span class="keyword">ON</span> Categorie.CodeCateg = P.CodeCateg
+        <span class="keyword">WHERE</span> Categorie.NomCateg <span class="keyword">LIKE</span> "*Viande*" )
+<span class="keyword">ORDER BY</span>
     F.NoFour;</code></pre>
 </div>
 
@@ -152,29 +152,29 @@
 </article>
 
 <div class="code">
-<pre><code><span class="fontions">SELECT</span>
+<pre><code><span class="keyword">SELECT</span>
     F.Societe,
     F.NoFour,
     F.Ville
-<span class="fontions">FROM</span>
-    Fournisseur<span class="fontions">AS</span> F
-<span class="fontions">WHERE</span>
-    F.NoFour<span class="fontions"> NOT IN</span> (
-       <span class="fontions"> SELECT</span>
+<span class="keyword">FROM</span>
+    Fournisseur<span class="keyword">AS</span> F
+<span class="keyword">WHERE</span>
+    F.NoFour<span class="keyword"> NOT IN</span> (
+       <span class="keyword"> SELECT</span>
             P.NoFour
-        <span class="fontions">FROM</span>
-            Categorie<span class="fontions"> AS</span> C
-           <span class="fontions"> INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
-       <span class="fontions"> WHERE</span>
-            C.NomCateg <span class="fontions">NOT LIKE</span> "Desserts"
+        <span class="keyword">FROM</span>
+            Categorie<span class="keyword"> AS</span> C
+           <span class="keyword"> INNER JOIN</span> Produit <span class="keyword">AS</span> P <span class="keyword">ON</span> C.CodeCateg = P.CodeCateg
+       <span class="keyword"> WHERE</span>
+            C.NomCateg <span class="keyword">NOT LIKE</span> "Desserts"
     )
-   <span class="fontions">AND </span>F.NoFour <span class="fontions">IN</span> (
-       <span class="fontions"> SELECT</span>
+   <span class="keyword">AND </span>F.NoFour <span class="keyword">IN</span> (
+       <span class="keyword"> SELECT</span>
             P.NoFour
-       <span class="fontions"> FROM</span>
-            <span class="fontions">INNER JOIN </span>Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
+       <span class="keyword"> FROM</span>
+            <span class="keyword">INNER JOIN </span>Produit <span class="keyword">AS</span> P <span class="keyword">ON</span> C.CodeCateg = P.CodeCateg
     )
-<span class="fontions">ORDER BY</span>
+<span class="keyword">ORDER BY</span>
     F.Societe;</code></pre>
 </div>
 
@@ -240,25 +240,25 @@
 </article>
 
 <div class="code">
-<pre><code><span class="fontions">SELECT</span>
+<pre><code><span class="keyword">SELECT</span>
     F.Societe,
     P.NomProd,
     Pa.PaysFR,
-    <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> CA,
-    <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * (C.CoefMarge * (1 - DC.[Remise (%)]) - 1)), 2) <span class="fontions">AS</span> Marge
-<span class="fontions">FROM</span> Categorie <span class="fontions">AS</span> C
-    <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
-    <span class="fontions">INNER JOIN</span> Fournisseur <span class="fontions">AS</span> F <span class="fontions">ON</span> P.NoFour = F.NoFour
-    <span class="fontions">INNER JOIN</span> DetailCommande <span class="fontions">AS</span> DC <span class="fontions">ON</span> P.RefProd = DC.[Réf produit]
-    <span class="fontions">INNER JOIN</span> Pays <span class="fontions">AS</span> Pa <span class="fontions">ON</span> F.NoPays = Pa.NoPays
-<span class="fontions">WHERE</span>
-    Pa.UE <span class="fontions">LIKE</span> "MEMBRE"
-<span class="fontions">GROUP BY</span>
+    <span class="func">ROUND</span>(<span class="func">SUM</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="keyword">AS</span> CA,
+    <span class="func">ROUND</span>(<span class="func">SUM</span>(DC.Quantité * P.CoutAchat * (C.CoefMarge * (1 - DC.[Remise (%)]) - 1)), 2) <span class="keyword">AS</span> Marge
+<span class="keyword">FROM</span> Categorie <span class="keyword">AS</span> C
+    <span class="keyword">INNER JOIN</span> Produit <span class="keyword">AS</span> P <span class="keyword">ON</span> C.CodeCateg = P.CodeCateg
+    <span class="keyword">INNER JOIN</span> Fournisseur <span class="keyword">AS</span> F <span class="keyword">ON</span> P.NoFour = F.NoFour
+    <span class="keyword">INNER JOIN</span> DetailCommande <span class="keyword">AS</span> DC <span class="keyword">ON</span> P.RefProd = DC.[Réf produit]
+    <span class="keyword">INNER JOIN</span> Pays <span class="keyword">AS</span> Pa <span class="keyword">ON</span> F.NoPays = Pa.NoPays
+<span class="keyword">WHERE</span>
+    Pa.UE <span class="keyword">LIKE</span> "MEMBRE"
+<span class="keyword">GROUP BY</span>
     F.Societe,
     P.NomProd,
     Pa.PaysFR
-<span class="fontions">ORDER BY</span>
-    CA <span class="fontions">DESC</span>;</code></pre>
+<span class="keyword">ORDER BY</span>
+    CA <span class="keyword">DESC</span>;</code></pre>
 </div>
 
 
@@ -339,30 +339,30 @@
         </div>
     </article>
 <div class="code">
-    <pre><code><span class="fontions">SELECT</span>
-    <span class="chiffre">YEAR</span>(Co.DateCde) <span class="fontions">AS</span> Années,
+    <pre><code><span class="keyword">SELECT</span>
+    <span class="func">YEAR</span>(Co.DateCde) <span class="keyword">AS</span> Années,
     F.Societe,
     P.NomProd,
-    <span class="chiffre">Round</span>(<span class="chiffre">sum</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> CA,
-    <span class="chiffre">Round</span>(<span class="chiffre">sum</span>(DC.Quantité), 2) <span class="fontions">AS</span> Quantité_vendues
-<span class="fontions">FROM</span>
+    <span class="func">Round</span>(<span class="func">sum</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="keyword">AS</span> CA,
+    <span class="func">Round</span>(<span class="func">sum</span>(DC.Quantité), 2) <span class="keyword">AS</span> Quantité_vendues
+<span class="keyword">FROM</span>
     (
         (
             (
-        Categorie <span class="fontions">AS</span> C
-                <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
-            )<span class="fontions">INNER JOIN</span> Fournisseur <span class="fontions">AS</span> F <span class="fontions">ON</span> P.NoFour = F.NoFour
-        )<span class="fontions">INNER JOIN</span> DetailCommande <span class="fontions">AS</span> DC <span class="fontions">ON</span> P.RefProd = DC.[Réf produit]
-    )<span class="fontions">INNER JOIN</span> Commande <span class="fontions">AS</span> Co <span class="fontions">ON</span> DC.[N° commande] = Co.[N° commande]
-<span class="fontions">WHERE</span>
-    C.NomCateg <span class="fontions">IN</span> ("Desserts", "Boissons")
-<span class="fontions">GROUP BY</span>
-    <span class="chiffre">YEAR </span>(Co.DateCde),
+        Categorie <span class="keyword">AS</span> C
+                <span class="keyword">INNER JOIN</span> Produit <span class="keyword">AS</span> P <span class="keyword">ON</span> C.CodeCateg = P.CodeCateg
+            )<span class="keyword">INNER JOIN</span> Fournisseur <span class="keyword">AS</span> F <span class="keyword">ON</span> P.NoFour = F.NoFour
+        )<span class="keyword">INNER JOIN</span> DetailCommande <span class="keyword">AS</span> DC <span class="keyword">ON</span> P.RefProd = DC.[Réf produit]
+    )<span class="keyword">INNER JOIN</span> Commande <span class="keyword">AS</span> Co <span class="keyword">ON</span> DC.[N° commande] = Co.[N° commande]
+<span class="keyword">WHERE</span>
+    C.NomCateg <span class="keyword">IN</span> ("Desserts", "Boissons")
+<span class="keyword">GROUP BY</span>
+    <span class="func">YEAR </span>(Co.DateCde),
     F.Societe,
     P.NomProd
-<span class="fontions">ORDER BY</span>
-    <span class="chiffre">YEAR</span>(Co.DateCde) <span class="fontions">DESC</span>,
-    4 <span class="fontions">DESC</span>;</code></pre>
+<span class="keyword">ORDER BY</span>
+    <span class="func">YEAR</span>(Co.DateCde) <span class="keyword">DESC</span>,
+    4 <span class="keyword">DESC</span>;</code></pre>
     </div>
 
     <div class="tableau">
@@ -437,36 +437,36 @@
     </article>
 
 <div class="code">
-<pre><code><span class="fontions">SELECT</span>
+<pre><code><span class="keyword">SELECT</span>
     P.NomProd,
     F.Societe,
-    <span class="chiffre">ROUND</span>(P.CoutAchat * C.CoefMarge, 2) <span class="fontions">AS</span> Prix,
-    ( <span class="fontions">SELECT</span> <span class="chiffre">COUNT(*)</span>
-        <span class="fontions">FROM</span> Produit <span class="fontions">AS</span> P
-            <span class="fontions">INNER JOIN</span> Categorie <span class="fontions">AS</span> C <span class="fontions">ON</span> P.CodeCateg = C.CodeCateg
-        <span class="fontions">WHERE</span> C.NomCateg = "Viandes"
-            <span class="fontions">AND</span> P.RefProd <span class="fontions">NOT IN</span> (
-                <span class="fontions">SELECT</span> DetailCommande.[Réf produit]
-                <span class="fontions">FROM</span> DetailCommande
+    <span class="func">ROUND</span>(P.CoutAchat * C.CoefMarge, 2) <span class="keyword">AS</span> Prix,
+    ( <span class="keyword">SELECT</span> <span class="func">COUNT(*)</span>
+        <span class="keyword">FROM</span> Produit <span class="keyword">AS</span> P
+            <span class="keyword">INNER JOIN</span> Categorie <span class="keyword">AS</span> C <span class="keyword">ON</span> P.CodeCateg = C.CodeCateg
+        <span class="keyword">WHERE</span> C.NomCateg = "Viandes"
+            <span class="keyword">AND</span> P.RefProd <span class="keyword">NOT IN</span> (
+                <span class="keyword">SELECT</span> DetailCommande.[Réf produit]
+                <span class="keyword">FROM</span> DetailCommande
             )
-    ) <span class="fontions">AS</span> Nombres_non_vendus,
-    ( <span class="fontions">SELECT</span> <span class="chiffre">COUNT(*)</span>
-        <span class="fontions">FROM</span> Produit <span class="fontions">AS</span> P
-            <span class="fontions">INNER JOIN</span> Categorie <span class="fontions">AS</span> C <span class="fontions">ON</span> P.CodeCateg = C.CodeCateg
-        <span class="fontions">WHERE</span> C.NomCateg = "Viandes"
-    ) <span class="fontions">AS</span> Nombres_total
-<span class="fontions">FROM</span> (
-    Categorie <span class="fontions">AS</span> C
-    <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
+    ) <span class="keyword">AS</span> Nombres_non_vendus,
+    ( <span class="keyword">SELECT</span> <span class="func">COUNT(*)</span>
+        <span class="keyword">FROM</span> Produit <span class="keyword">AS</span> P
+            <span class="keyword">INNER JOIN</span> Categorie <span class="keyword">AS</span> C <span class="keyword">ON</span> P.CodeCateg = C.CodeCateg
+        <span class="keyword">WHERE</span> C.NomCateg = "Viandes"
+    ) <span class="keyword">AS</span> Nombres_total
+<span class="keyword">FROM</span> (
+    Categorie <span class="keyword">AS</span> C
+    <span class="keyword">INNER JOIN</span> Produit <span class="keyword">AS</span> P <span class="keyword">ON</span> C.CodeCateg = P.CodeCateg
 )
-<span class="fontions">INNER JOIN</span> Fournisseur <span class="fontions">AS</span> F <span class="fontions">ON</span> P.NoFour = F.NoFour
-<span class="fontions">WHERE</span>
+<span class="keyword">INNER JOIN</span> Fournisseur <span class="keyword">AS</span> F <span class="keyword">ON</span> P.NoFour = F.NoFour
+<span class="keyword">WHERE</span>
     C.NomCateg = "Viandes"
-    <span class="fontions">AND</span> P.RefProd <span class="fontions">NOT IN</span> (
-        <span class="fontions">SELECT</span> DetailCommande.[Réf produit]
-        <span class="fontions">FROM</span> DetailCommande
+    <span class="keyword">AND</span> P.RefProd <span class="keyword">NOT IN</span> (
+        <span class="keyword">SELECT</span> DetailCommande.[Réf produit]
+        <span class="keyword">FROM</span> DetailCommande
     )
-<span class="fontions">ORDER BY</span>
+<span class="keyword">ORDER BY</span>
     P.NomProd;</code></pre>
 </div>
 
@@ -525,30 +525,30 @@
 
 
 <div class="code">
-<pre><code><span class="fontions">SELECT</span>
-    C1.Contact <span class="fontions">AS</span> Client,
-    Cclient.NB <span class="fontions">AS</span> Client_commande,
-    C2.Contact <span class="fontions">AS</span> Partenaire,
-    Cpartenaire.NB <span class="fontions">AS</span> Partenaire_commande
-<span class="fontions">FROM</span> (
+<pre><code><span class="keyword">SELECT</span>
+    C1.Contact <span class="keyword">AS</span> Client,
+    Cclient.NB <span class="keyword">AS</span> Client_commande,
+    C2.Contact <span class="keyword">AS</span> Partenaire,
+    Cpartenaire.NB <span class="keyword">AS</span> Partenaire_commande
+<span class="keyword">FROM</span> (
     (
-        Clientele <span class="fontions">AS</span> C1
-        <span class="fontions">INNER JOIN</span> Clientele <span class="fontions">AS</span> C2 <span class="fontions">ON</span> C1.CodeCli = C2.CodeCliPart
+        Clientele <span class="keyword">AS</span> C1
+        <span class="keyword">INNER JOIN</span> Clientele <span class="keyword">AS</span> C2 <span class="keyword">ON</span> C1.CodeCli = C2.CodeCliPart
     )
-    <span class="fontions">INNER JOIN</span> (
-        <span class="fontions">SELECT</span> C.CodeCli, <span class="chiffre">COUNT</span>(C.[N° commande]) <span class="fontions">AS</span> NB
-        <span class="fontions">FROM</span> Commande <span class="fontions">AS</span> C
-        <span class="fontions">GROUP BY</span> C.CodeCli
-    ) <span class="fontions">AS</span> Cclient <span class="fontions">ON</span> C1.CodeCli = Cclient.CodeCli
+    <span class="keyword">INNER JOIN</span> (
+        <span class="keyword">SELECT</span> C.CodeCli, <span class="func">COUNT</span>(C.[N° commande]) <span class="keyword">AS</span> NB
+        <span class="keyword">FROM</span> Commande <span class="keyword">AS</span> C
+        <span class="keyword">GROUP BY</span> C.CodeCli
+    ) <span class="keyword">AS</span> Cclient <span class="keyword">ON</span> C1.CodeCli = Cclient.CodeCli
 )
-<span class="fontions">INNER JOIN</span> (
-    <span class="fontions">SELECT</span> C.CodeCli, <span class="chiffre">COUNT</span>(C.[N° commande]) <span class="fontions">AS</span> NB
-    <span class="fontions">FROM</span> Commande <span class="fontions">AS</span> C
-    <span class="fontions">GROUP BY</span> C.CodeCli
-) <span class="fontions">AS</span> Cpartenaire <span class="fontions">ON</span> C2.CodeCli = Cpartenaire.CodeCli
-<span class="fontions">WHERE</span>
+<span class="keyword">INNER JOIN</span> (
+    <span class="keyword">SELECT</span> C.CodeCli, <span class="func">COUNT</span>(C.[N° commande]) <span class="keyword">AS</span> NB
+    <span class="keyword">FROM</span> Commande <span class="keyword">AS</span> C
+    <span class="keyword">GROUP BY</span> C.CodeCli
+) <span class="keyword">AS</span> Cpartenaire <span class="keyword">ON</span> C2.CodeCli = Cpartenaire.CodeCli
+<span class="keyword">WHERE</span>
     Cpartenaire.NB = Cclient.NB
-<span class="fontions">ORDER BY</span>
+<span class="keyword">ORDER BY</span>
     C1.Contact;</code></pre>
 </div>
 

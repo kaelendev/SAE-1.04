@@ -59,31 +59,31 @@ Cela permet ainsi à KDou de devenir un peu plus écoresponsable tout en faisant
 </article>
 
 <div class="code">
-    <pre><code><span class="fontions">SELECT</span>
+    <pre><code><span class="keyword">SELECT</span>
     F.Societe,
     P.NomProd,
-    <span class="chiffre">SUM</span>(DC.Quantité) <span class="fontions">AS</span> Quantité_commander,
-    <span class="chiffre">Count</span>(DC.[N° commande]) <span class="fontions">AS</span> Nombres_commandes,
-    <span class="chiffre">Round</span>(<span class="chiffre">AVG</span>(DC.Quantité), 1) <span class="fontions">AS</span> Moyenne_commander,
+    <span class="func">SUM</span>(DC.Quantité) <span class="keyword">AS</span> Quantité_commander,
+    <span class="func">Count</span>(DC.[N° commande]) <span class="keyword">AS</span> Nombres_commandes,
+    <span class="func">Round</span>(<span class="func">AVG</span>(DC.Quantité), 1) <span class="keyword">AS</span> Moyenne_commander,
     P.UnitStock,
-    <span class="chiffre">Year</span>(Co.DateCde) <span class="fontions">AS</span> Années
-<span class="fontions">FROM</span>
+    <span class="func">Year</span>(Co.DateCde) <span class="keyword">AS</span> Années
+<span class="keyword">FROM</span>
     (
         (
             (
-                Fournisseur <span class="fontions">AS</span> F
-                <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> F.NoFour = P.NoFour
-            )<span class="fontions">INNER JOIN</span> DetailCommande <span class="fontions">AS</span> DC <span class="fontions">ON</span> P.RefProd = DC.[Réf produit]
-        )<span class="fontions">INNER JOIN</span> Categorie <span class="fontions">AS</span> C <span class="fontions">ON</span> P.CodeCateg = C.CodeCateg
-    )<span class="fontions">INNER JOIN</span> Commande <span class="fontions">AS</span> Co <span class="fontions">ON</span> DC.[N° commande] = Co.[N° commande]
-<span class="fontions">GROUP BY</span>
+                Fournisseur <span class="keyword">AS</span> F
+                <span class="keyword">INNER JOIN</span> Produit <span class="keyword">AS</span> P <span class="keyword">ON</span> F.NoFour = P.NoFour
+            )<span class="keyword">INNER JOIN</span> DetailCommande <span class="keyword">AS</span> DC <span class="keyword">ON</span> P.RefProd = DC.[Réf produit]
+        )<span class="keyword">INNER JOIN</span> Categorie <span class="keyword">AS</span> C <span class="keyword">ON</span> P.CodeCateg = C.CodeCateg
+    )<span class="keyword">INNER JOIN</span> Commande <span class="keyword">AS</span> Co <span class="keyword">ON</span> DC.[N° commande] = Co.[N° commande]
+<span class="keyword">GROUP BY</span>
     F.Societe,
     P.NomProd,
     P.UnitStock,
-    <span class="chiffre">Year</span>(Co.DateCde)
-<span class="chiffre">ORDER BY</span>
-    <span class="chiffre">Year</span>(Co.DateCde) <span class="fontions">DESC</span>,
-    5 <span class="fontions">DESC</span>;</code></pre>
+    <span class="func">Year</span>(Co.DateCde)
+<span class="func">ORDER BY</span>
+    <span class="func">Year</span>(Co.DateCde) <span class="keyword">DESC</span>,
+    5 <span class="keyword">DESC</span>;</code></pre>
 </div>
 <div class="tableau">
     <table>

@@ -19,8 +19,9 @@
     --color-pre-background: #1a202c;
     --color-pre:#f7fafc;
 
-    --color-fontions:#63b3ed;
+    --color-keyword:#63b3ed;
     --color-chiffre:#ffa500;
+    --color-nombre:rgb(98, 21, 98);
     --color-th:#808080;
     --color-th-even:rgba(80,80,80,0.5);
     --color-autre:whitesmoke;

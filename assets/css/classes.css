@@ -145,13 +145,18 @@
 }
 
 
-.fontions {
-    color: var(--color-fontions);
+.keyword {
+    color: var(--color-keyword);
     font-weight: bold;
 }
-.chiffre {
+.func {
     color:var(--color-chiffre);
 }
+
+.nombre {
+    color: var(--color-nombre);
+}
+
 .tableau{
     grid-area:tableau;
     overflow-x:auto;

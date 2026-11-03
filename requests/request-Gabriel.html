@@ -60,31 +60,31 @@
 <div class="code">
     <pre>
         <code>
-          <span class="fontions"> SELECT</span> 
-    <span class="fontions"> IIf</span>(
+          <span class="keyword"> SELECT</span> 
+    <span class="keyword"> IIf</span>(
         pa.PaysFR = "France",
         "France",
-         <span class="chiffre"> Iif</span>(pa.UE = True, "Union européenne", "Hors UE")
+         <span class="func"> Iif</span>(pa.UE = True, "Union européenne", "Hors UE")
     )  <span class="fonctions"> AS </span>[Zobe de provenance],
-    <span class="chiffre"> Sum</span>(d.Quantité * p.CoutAchat * c.CoefMarge) AS [CA zone],
-     <span class="chiffre"> Sum</span>(d.Quantité) AS [Unités vendues]
- <span class="fontions"> FROM</span>
+    <span class="func"> Sum</span>(d.Quantité * p.CoutAchat * c.CoefMarge) AS [CA zone],
+     <span class="func"> Sum</span>(d.Quantité) AS [Unités vendues]
+ <span class="keyword"> FROM</span>
     (
         (
             (
-                DetailCommande  <span class="fontions"> AS</span> d
-                 <span class="fontions">INNER JOIN</span> Produit <span class="fonctions">AS</span> p  <span class="fontions"> ON</span> d.[Réf produit] = p.RefProd
+                DetailCommande  <span class="keyword"> AS</span> d
+                 <span class="keyword">INNER JOIN</span> Produit <span class="fonctions">AS</span> p  <span class="keyword"> ON</span> d.[Réf produit] = p.RefProd
             )
-             <span class="fontions"> INNER JOIN</span> Categorie  <span class="fontions"> AS</span> c <span class="fonctions"> ON</span> p.CodeCateg = c.CodeCateg
+             <span class="keyword"> INNER JOIN</span> Categorie  <span class="keyword"> AS</span> c <span class="fonctions"> ON</span> p.CodeCateg = c.CodeCateg
         )
-         <span class="fontions"> INNER JOIN Fournisseur  <span class="fontions"> AS </span>f <span class="fonctions">ON</span> p.NoFour = f.NoFour
+         <span class="keyword"> INNER JOIN Fournisseur  <span class="keyword"> AS </span>f <span class="fonctions">ON</span> p.NoFour = f.NoFour
     )
-     <span class="fontions"> INNER JOIN </span>Pays  <span class="fontions"> AS</span> pa <span class="fonctions">ON</span> f.NoFour = pa.NoPays
- <span class="fontions"> GROUP BY</span>
-    <span class="chiffre"> IIf</span>(
+     <span class="keyword"> INNER JOIN </span>Pays  <span class="keyword"> AS</span> pa <span class="fonctions">ON</span> f.NoFour = pa.NoPays
+ <span class="keyword"> GROUP BY</span>
+    <span class="func"> IIf</span>(
         pa.PaysFR = "France",
         "France",
-         <span class="chiffre"> Iif</span>(pa.UE = True, "Union européenne", "Hors UE")
+         <span class="func"> Iif</span>(pa.UE = True, "Union européenne", "Hors UE")
     );
     </code>
 </pre>

@@ -43,22 +43,61 @@
 <article class="cards">
     <div class="text penser">
     <h2> Ma réflexion </h2>
-    <p>Pour mon indicateur personnel j’ai voulu ...
+    <p>Pour mon indicateur personnel j’ai voulu lister les 3 sociétés qui délivre le plus de commande de produits étant dans la catégorie "Viandes" en 2021. Cette commande peut être adaptée pour suivre chaque catégorie sur chaque année (je n'ai pas les compétences pour le faire).
+    <br><br>
+    Cela permettrait de savoir vers quelle société de diriger pour s'informer sur le marché de la viandes, est-ce que ces sociétés auraient besoin d'autres fournisseurs de produits dans la catégorie "Viandes" ?
     </p>
 </div>
 <div class="text action">
     <h2>Comment cela a été réalisé</h2>
-    <p>Pour cela ...</p>
+    <p>Cette requête SQL a été faite en faisant une jointure entre la table <em>Commande</em> et la table <em>DetailCommande</em> pour obtenir la référence du produit de la commande que l'on va utiliser sur une autre jointure avec la table <em>Produit</em> qui nous le code de la catégorie du produit. Ce code de catégorie va nous permettre d'accéder, à travers une jointure à la table <em>Categorie</em>, au nom de la catégorie pour laquelle nous voulons le top 3 des sociétés avec le pus de commande dans celle-ci. La dernière jointure est celle de la table <em>Fournisseur</em> qui nous permet d'accéder au nom de la société.
+    <br><br>
+    On trie pour n'avoir que les société de la catégorie "Viandes" et sur les commandes passées en 2021.<br>
+    On groupe par nom de société en selectionnant le nom de la société et le nombre de commande dans la catégorie associée choisie et on peut enfin afficher le 3 premiières sociétés ayant fait le plus de commande par ordre décroissant avec leur nombres de requêtes respectives dans cette catégorie à chacune.
+</p>
 </div>
 </article>
 
 <div class="code">
-    
+    <pre><div class="code"><span class="keyword">SELECT TOP</span> <span class="nombre">3</span> F.Societe, <span class="func">COUNT</span>(C.[N° commande]) <span class="keyword">AS</span> NbCommandes
+<span class="keyword">FROM</span> Commande <span class="keyword">AS</span> C
+    <span class="keyword">INNER JOIN</span> DetailCommande <span class="keyword">AS</span> Dc <span class="keyword">ON</span> C.[N° commande]=Dc.[N° commande]
+    <span class="keyword">INNER JOIN</span> Produit <span class="keyword">AS</span> P <span class="keyword">ON</span> P.RefProd=Dc.[Réf produit]
+    <span class="keyword">INNER JOIN</span> Categorie <span class="keyword">ON</span> Categorie.CodeCateg=P.CodeCateg
+    <span class="keyword">INNER JOIN</span> Fournisseur <span class="keyword">AS</span> F <span class="keyword">ON</span> F.NoFour=P.NoFour
+
+<span class="keyword">WHERE</span> Categorie.NomCateg <span class="keyword">LIKE</span> 'viandes'
+<span class="keyword">AND</span> <span class="func">YEAR</span>(C.DateCde)=<span class="nombre">2021</span>
+<span class="keyword">GROUP BY</span> F.Societe
+<span class="keyword">ORDER BY</span> <span class="nombre">2</span> <span class="keyword">DESC</span>;
+</div></pre>
 </div>
 
 
 <div class="tableau">
-    <p>Tableau ou Image du résultat</p>
+    <table>
+        <caption>Tableau du résultat</caption>
+        <thead>
+            <tr>
+                <th scope="col" title="Société">Societe</th>
+                <th scope="col" title="Nombre de commandes de la société pour la catégorie viandes">NbCommandes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Le Panier du Coin</td>
+                <td>64</td>
+            </tr>
+            <tr>
+                <td>Rontab</td>
+                <td>38</td>
+            </tr>
+            <tr>
+                <td>TanteGreta Handelsgruppe AG</td>
+                <td>33</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 </main>
 
