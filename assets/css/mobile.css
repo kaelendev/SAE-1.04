@@ -8,6 +8,14 @@
         height: auto;
     }
 
+    nav {
+        top: 2px;
+        padding: 2px;    }
+
+    .menu {
+        font-size: 20px;
+    }
+
     .text {
         max-width: 70vw;
     }

@@ -35,10 +35,11 @@ main {
 
 nav {
     z-index: 20;
-    top: 2px;
-    right: 2px;
+    top: 0px;
+    right: 5px;
     position: fixed;
     height: 99vh;
+    padding: 5px;
 
 }
 
