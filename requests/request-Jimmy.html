@@ -43,7 +43,9 @@
 <article class="cards">
     <div class="text penser">
     <h2> Ma réflexion </h2>
-    <p>Pour mon indicateur personnel j’ai voulu ...
+    <p>J'ai créé cette requette afin de repérer les jours de commande concernés par le passage à l’heure d’été. KDOu peut ensuite examiner si le volume de commandes varie à cette date et réfléchir à ses effets possibles sur l’activité et l’organisation des livraisons.
+    <br><br>
+    Elle affiche les dates distinctes des commandes passées un dimanche à partir du 25 mars, c’est-à-dire le dernier dimanche de mars, correspondant au passage à l’heure d’été.
     </p>
 </div>
 <div class="text action">
@@ -53,17 +55,36 @@
 
 </article>
 <div class="code">
-    
+    <pre>
+<span class="keyword">SELECT DISTINCT</span> <span class="func">DateValue</span>(c.DateCde) <span class="keyword">AS</span> JourCommande_DST
+<span class="keyword">FROM</span> Commande <span class="keyword">AS</span> c
+<span class="keyword">WHERE</span> <span class="func">DatePart</span>("m", c.DateCde) = <span class="nombre">3</span>
+  <span class="keyword">AND</span> c.DateCde >= <span class="func">DateSerial</span>(<span class="func">Year</span>(c.DateCde), <span class="nombre">3</span>, <span class="nombre">25</span>)
+  <span class="keyword">AND</span> <span class="func">Weekday</span>(c.DateCde, <span class="nombre">2</span>) = <span class="nombre">7</span>
+<span class="keyword">ORDER BY</span> <span class="func">DateValue</span>(c.DateCde);
+</pre>
 </div>
 
 
 <div class="tableau">
-    <p>Tableau ou Image du résultat</p>
+    <table>
+        <caption>Résultat de la requête</caption>
+        <thead>
+            <tr>
+                <th scope="col">JourCommande_DST</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>2021-03-28 00:00:00.000000</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 </main>
 
 <footer>
-    <p> Rapport de la SAE Base de données 2026 fait par Aymeryck Thomas Jimmy et Gabriel</p>
+    <p> Rapport de la SAE Base de données 2026 fait par Aymeryck, Thomas, Jimmy et Gabriel.</p>
 </footer>
 
 
