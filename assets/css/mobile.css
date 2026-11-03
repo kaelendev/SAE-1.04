@@ -1,16 +1,39 @@
 @media (max-width: 768px) {
     main {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        max-width: 90vw;
-        padding: 10px;
-
-        justify-content: center;
+        width: 99%;
+        padding: 5px;
     }
 
     .text {
-        width: 80vw;
+        max-width: 70vw;
     }
 
+    .code {
+        font-size: 10px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .sidebar {
+        width: 80%;
+        transform: translateX(+100vw);
+    }
+
+    .cards {
+        flex-direction: column;
+    }
+
+    
+
+    
 }

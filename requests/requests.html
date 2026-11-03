@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <h1> Rêquetes</h1>
+    <p></p>
+</header>
+
+
+<aside>
+    <nav>
+    <input type="checkbox" id="liste">
+    <label class="menu" for="liste">☰ </label>
+    <div class="sidebar">
+        <label class="menu-fermer" for="liste">&times;</label>
+        <ul>
+            <li> <h3> Page principale</h3></li>
+            <li> <a href="../index.html"> Page d'accueil</a></li>
+            <li> <h3> Requêtes Kdou</h3> </li>
+            <li> <a href="./requests.html#request1e"> Requête 1e  </a></li>
+            <li> <a href="./requests.html#request1h"> Requête 1h  </a></li>
+            <li> <a href="./requests.html#request2"> Requête 2  </a></li>
+            <li> <a href="./requests.html#request3"> Requête 3 </a></li>
+            <li> <a href="./requests.html#request4"> Requête 4 </a> </li>
+            <li> <a href="./requests.html#request5"> Requête 5 </a></li>
+            <li><h3> Requêtes personnelles pour Kdou</h3></li>
+            <li> <a href="./request-Aymeryck.html"> Requête perso Aymeryck  </a> </li>
+            <li> <a href="./request-Jimmy.html"> Requête perso Jimmy </a></li>
+            <li> <a href="./request-Thomas.html"> Requête perso Thomas</a></li>
+            <li> <a href="./request-Gabriel.html"> Requête perso Gabriel</a></li>
+        </ul>
+
+    </div>
+</nav>
+</aside>
+
+<main>
+
+
+<div class="request" id="request1e">
+    <h1> Rêquete 1 e :</h1>
+    <p> Quels fournisseurs proposent de la viande et du poisson ?</p>
+
+    <article class="cards">
+    <div class="text penser">
+        <h2> Notre réflexion </h2>
+        <p>L'intérêt de cette requête est de facilement trouver les fournisseur qui proposent deux types de protéiens animals(poisson et viandes)
+        </p>
+    </div>
+    <div class="text action">
+        <h2> Ce qu'on a fait</h2>
+        <p>Pour la réalisation de cette requête, il fallait simplement joindre le fournisseur avec les produits et catégorie (surtout c'est la catégorie
+            qui nous intéresse mais on est obligé de passer par produit qui est au milieux) et de sélectionner les fournisseur qui ont les Produits
+            du nom des deux catégorie. Ensuite on a trier par ordre croissant les noms des fournisseurs et on a projecter leurs numéro de fournisseur et leurs nom.
+        </p>
+    </div>
+    </article>
+
+
+<div class="code">
+<pre><code><span class="fontions">SELECT</span>
+    F.NoFour,
+    F.Societe
+<span class="fontions">FROM</span>
+    (
+        Fournisseur <span class="fontions">AS</span> F
+        <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> F.NoFour = P.NoFour
+    )
+   <span class="fontions"> INNER JOIN</span> Categorie <span class="fontions">AS</span> C <span class="fontions">ON</span> P.CodeCateg = C.CodeCateg
+<span class="fontions">WHERE</span>
+    C.NomCateg = "Poissons et fruits de mer"
+   <span class="fontions"> AND</span> C.NomCateg = "viandes"
+<span class="fontions">ORDER BY</span>
+    F.Societe;</code></pre>
+</div>
+
+
+<div class="tableau">
+    <table>
+        <caption> Notre résultat </caption>
+        <thead>
+        <tr>
+            <th scope="col">N° Fournisseur</th>
+            <th scope="col">Societe</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td> </td>
+            <td> </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+<div class="request" id="request1h">
+<h1> Rêquete 1 h :</h1>
+<p> . Quels fournisseurs ne proposent que des desserts ?</p>
+
+<article class="cards">
+<div class="text penser">
+    <h2> Notre réflexion </h2>
+    <p>L'intéret de cette requête est le fait de réperer les fournisseur de vendent que des desserts sont souvent la chose qui peuvent le plus impactée la santé de ses clients
+    </p>
+</div>
+<div class="text action">
+    <h2> Ce qu'on a fait</h2>
+    <p>Pour faire cette requête nous avons pris la table fournisseurs et fais deux sous requêtes. Pour la première on fait une jointure entre le produit et la catégorie et on prend les produit ni ne sont pas de catégorie dessert.
+        Et avec la sous requête on ne prend pas cette sélection de fournisseurs. Pour la deuximère sous requête on va juste chercher à trouver les produits qui sont toujours dans la sélection. Enfin on trie par la société du fournisseur
+        et on affiche le nom de la société,le numéro du fournisseur et la ville pour avoir des données assez discriminante pour reconnaitre le fournisseur en question.
+    </p>
+</div>
+</article>
+
+<div class="code">
+<pre><code><span class="fontions">SELECT</span>
+    F.Societe,
+    F.NoFour,
+    F.Ville
+<span class="fontions">FROM</span>
+    Fournisseur<span class="fontions">AS</span> F
+<span class="fontions">WHERE</span>
+    F.NoFour<span class="fontions"> NOT IN</span> (
+       <span class="fontions"> SELECT</span>
+            P.NoFour
+        <span class="fontions">FROM</span>
+            Categorie<span class="fontions"> AS</span> C
+           <span class="fontions"> INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
+       <span class="fontions"> WHERE</span>
+            C.NomCateg <span class="fontions">NOT LIKE</span> "Desserts"
+    )
+   <span class="fontions">AND </span>F.NoFour <span class="fontions">IN</span> (
+       <span class="fontions"> SELECT</span>
+            P.NoFour
+       <span class="fontions"> FROM</span>
+            <span class="fontions">INNER JOIN </span>Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
+    )
+<span class="fontions">ORDER BY</span>
+    F.Societe;;</code></pre>
+</div>
+
+
+<div class="tableau">
+    <table>
+        <caption> Extrait de notre résultat </caption>
+        <thead>
+        <tr>
+            <th scope="col">Société</th>
+            <th scope="col">Numéro de fournisseur</th>
+            <th scope="col">Ville</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Baker’s Treats, Ltd.</td>
+            <td>8</td>
+            <td>Manchester</td>
+        </tr>
+        <tr>
+            <td>Holland Zoetgoed BV</td>
+            <td>35</td>
+            <td>Zaandam</td>
+        </tr>
+        <tr>
+            <td>Nordlicht Feinkost GmbH</td>
+            <td>11</td>
+            <td>Berlin</td>
+        </tr>
+        <tr>
+            <td>Tulip & Co. Delicacies</td>
+            <td>22</td>
+            <td>Gouda</td>
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+<div class="request" id="request2">
+    <h1> Rêquete 2 :</h1>
+    <p>  Dans une réflexion en lien avec l’origine de ses produits : On veut comme indicateur le CA
+        total généré à ce jour avec les fournisseurs de l’UE ?</p>
+
+    <article class="cards">
+    <div class="text penser">
+        <h2> Notre réflexion </h2>
+        <p>L'intérêt d'analyser le CA des produits issus de fournisseurs de l'UE est de repérer les produits les plus rentables pour KDou.
+            Cela permet également d'identifier les fournisseurs avec lesquels maintenir de bonnes relations et ceux avec qui des ajustements sont nécessaires.
+        </p>
+    </div>
+    <div class="text action">
+        <h2> Ce qu'on a fait</h2>
+        <p>Pour faire cette requête on a fait des jointures entre les tables categories, produit, fournisseur, details commande et pays 
+            Où on a fait une sélection où on prennais seulement les membres de l'UE et on les a regroupé par fournisseur,produit et pays d'origine.
+            Puis on les a trié sur les plus grande vente faite. Enfin, il a juste fallu afficher les société des fournisseur, le nom du produit et du pays
+            et de faire la somme des ventes grâce aux calcule quantité venue fois cout d'achat fois le coefficient de marge fois la remise. Ainsi, on les 
+        les produit les plus vendues en premiers. On a aussi mis la marge que Kdou avait avec ces produit comme cela on a l'origine des produit de Kdou qui
+        se vent le plus et la marge pour voir si Kdou peut faire des changement sur certains produits sans être en déficite. 
+        </p>
+    </div>
+</article>
+
+<div class="code">
+<pre><code><span class="fontions">SELECT</span>
+    F.Societe,
+    P.NomProd,
+    Pa.PaysFR,
+    <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> VENTE,
+    <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * (C.CoefMarge * (1 - DC.[Remise (%)]) - 1)), 2) <span class="fontions">AS</span> Marge
+<span class="fontions">FROM</span> Categorie <span class="fontions">AS</span> C
+    <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
+    <span class="fontions">INNER JOIN</span> Fournisseur <span class="fontions">AS</span> F <span class="fontions">ON</span> P.NoFour = F.NoFour
+    <span class="fontions">INNER JOIN</span> DetailCommande <span class="fontions">AS</span> DC <span class="fontions">ON</span> P.RefProd = DC.[Réf produit]
+    <span class="fontions">INNER JOIN</span> Pays <span class="fontions">AS</span> Pa <span class="fontions">ON</span> F.NoPays = Pa.NoPays
+<span class="fontions">WHERE</span>
+    Pa.UE <span class="fontions">LIKE</span> "MEMBRE"
+<span class="fontions">GROUP BY</span>
+    F.Societe,
+    P.NomProd,
+    Pa.PaysFR
+<span class="fontions">ORDER BY</span>
+    VENTE <span class="fontions">DESC</span>;</code></pre>
+</div>
+
+
+<div class="tableau">
+    <table>
+        <caption> Extrait de notre résultat </caption>
+        <thead>
+        <tr>
+            <th scope="col">Société</th>
+            <th scope="col">Nom produit</th>
+            <th scope="col"> PaysFR</th>
+            <th scope="col">Ventes</th>
+            <th scope="col">Marges</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Moines de Paris</td>
+            <td>Côte de Blaye</td>
+            <td>France</td>
+            <td>402413,84</td>
+            <td>230699,7</td>
+        </tr>
+        <tr>
+            <td>Dolci e Sapori s.r.l.</td>
+            <td>Gorgonzola Telino</td>
+            <td>Italie</td>
+            <td>224265,46</td>
+            <td>113187,9</td>
+        </tr>
+        <tr>
+            <td>EthnicFood France</td>
+            <td>Camembert Pierrot</td>
+            <td>France</td>
+            <td>222359,69</td>
+            <td>113599,69</td>
+        </tr>
+        <tr>
+            <td>Dolci e Sapori s.r.l.</td>
+            <td>Mascarpone Fabioli</td>
+            <td>Italie</td>
+            <td>213470,4</td>
+            <td>103790,4</td>
+        </tr>
+        <tr>
+            <td>TanteGreta Handelsgruppe AG</td>
+            <td>Rhönbräu Klosterbier</td>
+            <td>Allemagne</td>
+            <td>204520,19</td>
+            <td>116558,16</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+<div class="request" id="request3">
+    <h1> Rêquete 3 :</h1>
+        <p> Dans une réflexion en lien avec la santé : On veut comme indicateur le chiffre d’affaire
+            généré (montant total des ventes) annuel pour les catégories desserts ou boissons?</p>
+    
+    <article class="cards">
+        <div class="text penser">
+            <h2> Notre réflexion </h2>
+            <p>L'intérêt de voir le CA annuel des desserts ou boissons est de repérer les produits mauvais
+                pour la santé consommés de manière régulière et en grandes quantités, afin d'agir en fonction
+                des caractéristiques des produits.</p>
+        </div>
+        <div class="text action">
+            <h2> Ce qu'on a fait</h2>
+            <p>Pour faire la requête, il fallait faire unejointure avec la table Catégorie pour sélectionner les desserts ou les boissons et avoir le
+            coefficient de marge du produit,puis la joindre à la table Produits afin d’avoir le nom du
+            produit et son coût puis la joindre faire joindre à la table fournisseurs pour avoir les noms des
+            fournisseurs, puis à la table détail commande pour les quantités de produits
+            commandées et les remises enfin j’ai joint la table commande pour trier par année.
+            Après cela, on a regroupé par année, nom de produit et fournisseur. Et enfin, on a trié en
+            décroissant par années et par la somme faite durant l’année (qui a été fait par la
+            fonction SUM et round afin de conserver deux chiffres à la fin). Ainsi on la valeur du
+            chiffre d’affaires avec le nom du produit et du fournisseurs. L’idée est de voir quel
+            produit se vend le mieux (la quantité permet de donner une visualisation de cela) et de
+            voir si le produit pourrait être nocif pour la santé et si on juge que oui on sait directement
+            quel fournisseur appeler pour revoir le problème ou quel produit il faut réduire la mise
+            en vente
+            </p>
+        </div>
+    </article>
+<div class="code">
+    <pre><code><span class="fontions">SELECT</span>
+    <span class="chiffre">YEAR</span>(Co.DateCde) <span class="fontions">AS</span> Années,
+    F.Societe,
+    P.NomProd,
+    <span class="chiffre">Round</span>(<span class="chiffre">sum</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> VENTE,
+    <span class="chiffre">Round</span>(<span class="chiffre">sum</span>(DC.Quantité), 2) <span class="fontions">AS</span> Quantité_vendues
+<span class="fontions">FROM</span>
+    (
+        (
+            (
+        Categorie <span class="fontions">AS</span> C
+                <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
+            )<span class="fontions">INNER JOIN</span> Fournisseur <span class="fontions">AS</span> F <span class="fontions">ON</span> P.NoFour = F.NoFour
+        )<span class="fontions">INNER JOIN</span> DetailCommande <span class="fontions">AS</span> DC <span class="fontions">ON</span> P.RefProd = DC.[Réf produit]
+    )<span class="fontions">INNER JOIN</span> Commande <span class="fontions">AS</span> Co <span class="fontions">ON</span> DC.[N° commande] = Co.[N° commande]
+<span class="fontions">WHERE</span>
+    C.NomCateg <span class="fontions">IN</span> ("Desserts", "Boissons")
+<span class="fontions">GROUP BY</span>
+    <span class="chiffre">YEAR </span>(Co.DateCde),
+    F.Societe,
+    P.NomProd
+<span class="fontions">ORDER BY</span>
+    <span class="chiffre">YEAR</span>(Co.DateCde) <span class="fontions">DESC</span>,
+    4 <span class="fontions">DESC</span>;</code></pre>
+    </div>
+
+    <div class="tableau">
+        <table>
+            <caption> Extrait de notre résultat </caption>
+            <thead>
+            <tr>
+            <th scope="col">Année</th>
+            <th scope="col">Société</th>
+            <th scope="col">Nom produit</th>
+            <th scope="col">Ventes </th>
+            <th scope="col">Quantité</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2022</td>
+                <td>Nordlicht Feinkost GmbH</td>
+                <td>NuNuCa Nuß-Nougat-Creme</td>
+                <td>952</td>
+                <td>60</td>
+            </tr>
+            <tr>
+                <td>2022</td>
+                <td>Coral Bay Delights Ltd.</td>
+                <td>Outback Lager</td>
+                <td>437,50</td>
+                <td>14</td>
+            </tr>
+            <tr>
+                <td>2021</td>
+                <td>Moines de Paris</td>
+                <td>Côte de Blaye</td>
+                <td>358 497,18</td>
+                <td>702</td>
+            </tr>
+            <tr>
+                <td>2021</td>
+                <td>TanteGreta Handelsgruppe AG</td>
+                <td>Rhönbräu Klosterbier</td>
+                <td>167 737,63</td>
+                <td>1270</td>
+            </tr>
+            <tr>
+                <td>2021</td>
+                <td>MakeaHerkkku Oy</td>
+                <td>Maxilaku</td>
+                <td>137 864,88</td>
+                <td>550</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="request" id="request4">
+    <h1> Rêquete 4 :</h1>
+    <p>Dans une réflexion en lien avec l’offre commerciale : Calcul de l’indicateur nombre de
+        produits carnés non commandés actuellement ? </p>
+    <article class="cards">
+        <div class="text penser">
+        <h2> Notre réflexion </h2>
+        <p>L'intérêt de voir si actuellement, il y a des viandes qui n'ont jamais été vendus, c'est de voir en un premier temps les produits
+            qui ne marchent pas et ainsi donc de voir les produits où il faudrait baisser le prix ou renégocier avec le fournisseur.</p>
+    </div>
+    <div class="text action">
+        <h2> Ce qu'on a fait</h2>
+        <p>Pour faire cette requête on a d'abord jointe les tables Catégories,Produits et Fournisseurs entre elle.
+            Puis, nous avons fait une sélection où on a pris les catégories viandes qui n'avait pas de ref produit pour trouver les viandes non vendues.
+            Ainsi, on a trié par nom de produit et décidé d'afficher le nom du produit, la société du fournisseur, le prix du produit arrondie à 2 pour des raisons d'affichage.
+            Puis faire une sous requête, qui est dédiée au comptage du nombre de produit de catégorie viande qui n'a pas était vendue.
+            Et enfin une autre sous requête qui compte tout le produit de catégorie viandes. Comme cela on peut voir facilement combien de viandes
+            n'est pas vendue par rapport aux nombres totale de viandes et si on vu qu'il y a un écart trop important s'intérroger sur baisser le prix 
+            de vente de ces viandes.
+        </p>
+    </article>
+
+<div class="code">
+<pre><code><span class="fontions">SELECT</span>
+    P.NomProd,
+    F.Societe,
+    <span class="chiffre">ROUND</span>(P.CoutAchat * C.CoefMarge, 2) <span class="fontions">AS</span> Prix,
+    ( <span class="fontions">SELECT</span> <span class="chiffre">COUNT(*)</span>
+        <span class="fontions">FROM</span> Produit <span class="fontions">AS</span> P
+            <span class="fontions">INNER JOIN</span> Categorie <span class="fontions">AS</span> C <span class="fontions">ON</span> P.CodeCateg = C.CodeCateg
+        <span class="fontions">WHERE</span> C.NomCateg = "Viandes"
+            <span class="fontions">AND</span> P.RefProd <span class="fontions">NOT IN</span> (
+                <span class="fontions">SELECT</span> DetailCommande.[Réf produit]
+                <span class="fontions">FROM</span> DetailCommande
+            )
+    ) <span class="fontions">AS</span> Nombres_non_vendus,
+    ( <span class="fontions">SELECT</span> <span class="chiffre">COUNT(*)</span>
+        <span class="fontions">FROM</span> Produit <span class="fontions">AS</span> P
+            <span class="fontions">INNER JOIN</span> Categorie <span class="fontions">AS</span> C <span class="fontions">ON</span> P.CodeCateg = C.CodeCateg
+        <span class="fontions">WHERE</span> C.NomCateg = "Viandes"
+    ) <span class="fontions">AS</span> Nombres_total
+<span class="fontions">FROM</span> (
+    Categorie <span class="fontions">AS</span> C
+    <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
+)
+<span class="fontions">INNER JOIN</span> Fournisseur <span class="fontions">AS</span> F <span class="fontions">ON</span> P.NoFour = F.NoFour
+<span class="fontions">WHERE</span>
+    C.NomCateg = "Viandes"
+    <span class="fontions">AND</span> P.RefProd <span class="fontions">NOT IN</span> (
+        <span class="fontions">SELECT</span> DetailCommande.[Réf produit]
+        <span class="fontions">FROM</span> DetailCommande
+    )
+<span class="fontions">ORDER BY</span>
+    P.NomProd;</code></pre>
+</div>
+
+<div class="tableau">
+    <table>
+        <caption> Extrait de notre résultat </caption>
+        <thead>
+        <tr>
+            <th scope="col">Nom produit</th>
+            <th scope="col">Société</th>
+            <th scope="col">Prix</th>
+            <th scope="col"> Nombres_non_vendus</th>
+            <th scope="col">Nombres_total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Paté de Campagne au Pommeau</td>
+            <td>Moines de Paris</td>
+            <td>53,38</td>
+            <td>2</td>
+            <td>8</td>
+        </tr>
+        <tr>
+            <td>Terrine Andouilloux</td>
+            <td>EthnicFood France</td>
+            <td>46,38</td>
+            <td>2</td>
+            <td>8</td>
+        </tr>
+    </table>
+</div>
+</div>
+
+<div class="request" id="request5">
+
+    <h1> Rêquete 5 :</h1>
+    <p> Dans une réflexion sur le partenariat client : A-t-on des clients pilotes d’un réseau
+        partenaire ayant autant de commandes que les clients partenaires ? </p>
+
+
+    <article class="cards">
+    <div class="text penser">
+        <h2> Notre réflexion </h2>
+        <p>L'intéret de cette requête est de voir s'il y a des partenaires qui commande autants
+            que les clients, afin est le fait de voir si il faudrait insister les clients à amener leurs partaines à commander chez Kdou.</p>
+    </div>
+    <div class="text action">
+        <h2> Ce qu'on a fait</h2>
+        <p>Pour cela, il fallait faire une jointure entre la table client et elle-même avec l’identifiant du client et celui de son
+            partenaire puis, faire une sous-requête dans le from pour récupérer une table
+            commande avec l’id des clients et le nombre de commandes pour les associer aux deux
+            tables de clients puis, il a juste fallu de faire la sélection où on prend les lignes où le
+            nombre de commandes des partenaires est égale aux nombres de commandes de
+            clients. Et puis on a trié par nom de client et on a affiché le nom du client, son
+            nombre de commande et la même chose pour le partenaire afin de voir si les partenaires commandes autant que les clients qui les ont invités </p>
+    </div>
+    </article>
+
+
+<div class="code">
+<pre><code><span class="fontions">SELECT</span>
+    C1.Contact <span class="fontions">AS</span> Client,
+    Cclient.NB <span class="fontions">AS</span> Client_commande,
+    C2.Contact <span class="fontions">AS</span> Partenaire,
+    Cpartenaire.NB <span class="fontions">AS</span> Partenaire_commande
+<span class="fontions">FROM</span> (
+    (
+        Clientele <span class="fontions">AS</span> C1
+        <span class="fontions">INNER JOIN</span> Clientele <span class="fontions">AS</span> C2 <span class="fontions">ON</span> C1.CodeCli = C2.CodeCliPart
+    )
+    <span class="fontions">INNER JOIN</span> (
+        <span class="fontions">SELECT</span> C.CodeCli, <span class="chiffre">COUNT</span>(C.[N° commande]) <span class="fontions">AS</span> NB
+        <span class="fontions">FROM</span> Commande <span class="fontions">AS</span> C
+        <span class="fontions">GROUP BY</span> C.CodeCli
+    ) <span class="fontions">AS</span> Cclient <span class="fontions">ON</span> C1.CodeCli = Cclient.CodeCli
+)
+<span class="fontions">INNER JOIN</span> (
+    <span class="fontions">SELECT</span> C.CodeCli, <span class="chiffre">COUNT</span>(C.[N° commande]) <span class="fontions">AS</span> NB
+    <span class="fontions">FROM</span> Commande <span class="fontions">AS</span> C
+    <span class="fontions">GROUP BY</span> C.CodeCli
+) <span class="fontions">AS</span> Cpartenaire <span class="fontions">ON</span> C2.CodeCli = Cpartenaire.CodeCli
+<span class="fontions">WHERE</span>
+    Cpartenaire.NB = Cclient.NB
+<span class="fontions">ORDER BY</span>
+    C1.Contact;</code></pre>
+</div>
+
+<div class="tableau">
+    <table>
+        <caption> Tableau de notre résultat </caption>
+        <thead>
+        <tr>
+            <th scope="col">Client</th>
+            <th scope="col">Client_commande</th>
+            <th scope="col">Partenaire</th>
+            <th scope="col">Partenaire_commande</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Gus Kerba</td>
+            <td>17</td>
+            <td>Isabelle Tricote</td>
+            <td>17</td>
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+</main>
+
+<footer>
+    <p> Rapport de la SAE Base de données 2026 fait par Aymeryck Thomas Jimmy et Gabriel</p>
+</footer>
+
+
+</body>
+</html>
