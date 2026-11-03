@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <h1> Rêquete 1 e :</h1>
+    <p> Quels fournisseurs proposent de la viande et du poisson ?</p>
+</header>
+
+
+<aside>
+    <nav>
+    <input type="checkbox" id="liste">
+    <label class="menu" for="liste">☰ </label>
+    <div class="sidebar">
+        <label class="menu-fermer" for="liste">&times;</label>
+        <ul>
+            <li> <h3> Page principale</h3></li>
+            <li> <a href="../index.html"> Page d'accueil</a></li>
+            <li> <h3> Requêtes Kdou</h3> </li>
+            <li class="current"> <a href="./request1e.html"> Requête 1e </a></li>
+            <li> <a href="./request1h.html"> Requête 1h  </a></li>
+            <li> <a href="./request2.html"> Requête 2  </a></li>
+            <li> <a href="./request3.html"> Requête 3 </a></li>
+            <li> <a href="./request4.html"> Requête 4 </a> </li>
+            <li> <a href="./request5.html"> Requête 5 </a></li>
+            <li><h3> Requêtes personnelles pour Kdou</h3></li>
+            <li> <a href="./request-Aymeryck.html"> Requête perso Aymeryck  </a> </li>
+            <li> <a href="./request-Jimmy.html"> Requête perso Jimmy </a></li>
+            <li> <a href="./request-Thomas.html"> Requête perso Thomas</a></li>
+            <li> <a href="./request-Gabriel.html"> Requête perso Gabriel</a></li>
+        </ul>
+
+    </div>
+</nav>
+</aside>
+
+<main>
+    <div class="text penser">
+    <h2> Notre réflexion </h2>
+    <p>L'intérêt de cette requête est de facilement trouver les fournisseur qui proposent deux types de protéiens animals(poisson et viandes)
+    </p>
+</div>
+<div class="text action">
+    <h2> Ce qu'on a fait</h2>
+    <p>Pour la réalisation de cette requête, il fallait simplement joindre le fournisseur avec les produits et catégorie (surtout c'est la catégorie
+        qui nous intéresse mais on est obligé de passer par produit qui est au milieux) et de sélectionner les fournisseur qui ont les Produits
+        du nom des deux catégorie. Ensuite on a trier par ordre croissant les noms des fournisseurs et on a projecter leurs numéro de fournisseur et leurs nom.
+    </p>
+</div>
+
+<div class="code">
+<pre><code><span class="fontions">SELECT</span>
+    F.NoFour,
+    F.Societe
+<span class="fontions">FROM</span>
+    (
+        Fournisseur <span class="fontions">AS</span> F
+        <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> F.NoFour = P.NoFour
+    )
+   <span class="fontions"> INNER JOIN</span> Categorie <span class="fontions">AS</span> C <span class="fontions">ON</span> P.CodeCateg = C.CodeCateg
+<span class="fontions">WHERE</span>
+    C.NomCateg = "Poissons et fruits de mer"
+   <span class="fontions"> AND</span> C.NomCateg = "viandes"
+<span class="fontions">ORDER BY</span>
+    F.Societe;</code></pre>
+</div>
+
+
+<div class="tableau">
+    <table>
+        <caption> Notre résultat </caption>
+        <thead>
+        <tr>
+            <th scope="col">N° Fournisseur</th>
+            <th scope="col">Societe</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td> </td>
+            <td> </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</main>
+
+<footer>
+    <p> Rapport de la SAE Base de données 2026 fait par Aymeryck Thomas Jimmy et Gabriel</p>
+</footer>
+
+
+</body>
+</html>

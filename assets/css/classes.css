@@ -118,7 +118,8 @@
 
 
 .penser {
-    grid-area: reflexion;;
+    grid-area: reflexion;
+    place-self: center;
  }
 
 .action {
