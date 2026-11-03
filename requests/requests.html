@@ -212,7 +212,7 @@
     F.Societe,
     P.NomProd,
     Pa.PaysFR,
-    <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> VENTE,
+    <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> CA,
     <span class="chiffre">ROUND</span>(<span class="chiffre">SUM</span>(DC.Quantité * P.CoutAchat * (C.CoefMarge * (1 - DC.[Remise (%)]) - 1)), 2) <span class="fontions">AS</span> Marge
 <span class="fontions">FROM</span> Categorie <span class="fontions">AS</span> C
     <span class="fontions">INNER JOIN</span> Produit <span class="fontions">AS</span> P <span class="fontions">ON</span> C.CodeCateg = P.CodeCateg
@@ -226,7 +226,7 @@
     P.NomProd,
     Pa.PaysFR
 <span class="fontions">ORDER BY</span>
-    VENTE <span class="fontions">DESC</span>;</code></pre>
+    CA <span class="fontions">DESC</span>;</code></pre>
 </div>
 
 
@@ -238,7 +238,7 @@
             <th scope="col">Société</th>
             <th scope="col">Nom produit</th>
             <th scope="col"> PaysFR</th>
-            <th scope="col">Ventes</th>
+            <th scope="col">CA</th>
             <th scope="col">Marges</th>
         </tr>
         </thead>
@@ -319,7 +319,7 @@
     <span class="chiffre">YEAR</span>(Co.DateCde) <span class="fontions">AS</span> Années,
     F.Societe,
     P.NomProd,
-    <span class="chiffre">Round</span>(<span class="chiffre">sum</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> VENTE,
+    <span class="chiffre">Round</span>(<span class="chiffre">sum</span>(DC.Quantité * P.CoutAchat * C.CoefMarge * (1 - DC.[Remise (%)])), 2) <span class="fontions">AS</span> CA,
     <span class="chiffre">Round</span>(<span class="chiffre">sum</span>(DC.Quantité), 2) <span class="fontions">AS</span> Quantité_vendues
 <span class="fontions">FROM</span>
     (
@@ -349,7 +349,7 @@
             <th scope="col">Année</th>
             <th scope="col">Société</th>
             <th scope="col">Nom produit</th>
-            <th scope="col">Ventes </th>
+            <th scope="col">CA </th>
             <th scope="col">Quantité</th>
             </tr>
             </thead>
