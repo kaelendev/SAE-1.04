@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="C:\Users\Jeune\Downloads\Nouveau dossier\SAE-1.04\assets\css\css.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <meta name="viewport" content="width=device-width initial-scale=1">
     <title>Title</title>
 </head>
@@ -21,17 +21,17 @@
             <li> <h3> Page principale</h3></li>
             <li> <a href="../index.html"> Page d'accueil</a></li>
             <li> <h3> Requêtes Kdou</h3> </li>
-            <li> <a href="./request1.html"> Requête 1)  </a></li>
-            <li> <a href="./request1h.html"> Requête 1h  </a></li>
-            <li> <a href="./request2.html"> Requête 2  </a></li>
-            <li> <a href="./request3.html"> Requête 3 </a></li>
-            <li> <a href="./request4.html"> Requête 4 </a> </li>
-            <li> <a href="./request5.html"> Requête 5 </a></li>
+            <li> <a href="./requests#request1e"> Requête 1e  </a></li>
+            <li> <a href="./requests#request1h"> Requête 1h  </a></li>
+            <li> <a href="./requests#request2"> Requête 2  </a></li>
+            <li> <a href="./requests#request3"> Requête 3 </a></li>
+            <li> <a href="./requests#request4"> Requête 4 </a> </li>
+            <li> <a href="./requests#request5"> Requête 5 </a></li>
             <li><h3> Requêtes personnelles pour Kdou</h3></li>
             <li> <a href="./request-Aymeryck.html"> Requête perso Aymeryck  </a> </li>
             <li> <a href="./request-Jimmy.html"> Requête perso Jimmy </a></li>
             <li> <a href="./request-Thomas.html"> Requête perso Thomas</a></li>
-            <li class="current"> <a href="./request-Gabriel.html"> Requête perso Gabriel</a></li>
+            <li> <a href="./request-Gabriel.html"> Requête perso Gabriel</a></li>
         </ul>
 
     </div>
@@ -40,7 +40,8 @@
 
 <main>
 
-<div class="text penser">
+<article class="cards">
+    <div class="text penser">
     <h2> Ma réflexion </h2>
     <p>Pour mon indicateur personnel j’ai voulu savoir où se trouvais les principaux fournisseur
          de Kdou qui font son chiffres d'affaires cela permetteris à l'entreprise si les fournisseur 
@@ -51,10 +52,11 @@
     <h2> Comment cela à été réalisé</h2>
     <p>Pour cela, j'ai fait une jointure entre les tables produit, détails commandes, catégories, fournisseur et pays. Et puis, j'ai regroupé grâce un double IIf.
         Si le pays du fournisseur est la France on regroupe entre Français, sinon si il fait partie de l'union européenne on l'associe avec les autre membres de 
-        l'union euro^é et si non encore on les regroupes dans la zone no UE. Et puis on fait la somme du chiffres d'affaires des fournisseurs et on fait la somme de la
+        l'union européenne et si non encore on les regroupes dans la zone no UE. Et puis on fait la somme du chiffres d'affaires des fournisseurs et on fait la somme de la
         quantité de produits vendues pour pouvoir comparer les différents groupes facilement
     </p>
 </div>
+</article>
 
 <div class="code">
     <pre>
