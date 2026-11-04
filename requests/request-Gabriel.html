@@ -50,16 +50,14 @@
 <div class="text action">
     <h2>Comment cela a été réalisé</h2>
     <p>Pour cela, j’ai joint les tables Produit, DétailCommande, Catégorie, Fournisseur et Pays. J’ai ensuite regroupé les fournisseurs à l’aide de deux fonctions IIf
-         pour regrouper les fournisseurs français entre eux si leur pays est la France. Sinon, je les regroupe avec les fournisseurs des autres pays de l’Union européenne s’ils viennent d’un pays de l’UE les autres sont regroupés dans la catégorie  Hors UE .
+        pour regrouper les fournisseurs français entre eux si leur pays est la France. Sinon, je les regroupe avec les fournisseurs des autres pays de l’Union européenne s’ils viennent d’un pays de l’UE les autres sont regroupés dans la catégorie  Hors UE .
         Enfin, j’ai calculé le chiffre d’affaires total et la quantité de produits vendus afin de comparer facilement les différents groupes et de voir dans lesquels il est le plus intéressant d’investir.
     </p>
 </div>
 </article>
 
 <div class="code">
-    <pre>
-        <code>
-          <span class="keyword"> SELECT</span> 
+    <pre> <code> <span class="keyword"> SELECT</span> 
     <span class="keyword"> IIf</span>(
         pa.PaysFR = "France",
         "France",
@@ -72,13 +70,13 @@
         (
             (
                 DetailCommande  <span class="keyword"> AS</span> d
-                 <span class="keyword">INNER JOIN</span> Produit <span class="fonctions">AS</span> p  <span class="keyword"> ON</span> d.[Réf produit] = p.RefProd
+                <span class="keyword">INNER JOIN</span> Produit <span class="fonctions">AS</span> p  <span class="keyword"> ON</span> d.[Réf produit] = p.RefProd
             )
-             <span class="keyword"> INNER JOIN</span> Categorie  <span class="keyword"> AS</span> c <span class="fonctions"> ON</span> p.CodeCateg = c.CodeCateg
+             <span class="keyword"> INNER JOIN</span> Categorie  <span class="keyword"> AS</span> c <span class="keyword"> ON</span> p.CodeCateg = c.CodeCateg
         )
-         <span class="keyword"> INNER JOIN Fournisseur</span>  <span class="keyword"> AS </span>f <span class="fonctions">ON</span> p.NoFour = f.NoFour
+         <span class="keyword"> INNER JOIN Fournisseur</span>  <span class="keyword"> AS </span>f <span class="keyword">ON</span> p.NoFour = f.NoFour
     )
-     <span class="keyword"> INNER JOIN </span>Pays  <span class="keyword"> AS</span> pa <span class="fonctions">ON</span> f.NoFour = pa.NoPays
+     <span class="keyword"> INNER JOIN </span>Pays  <span class="keyword"> AS</span> pa <span class="keyword">ON</span> f.NoFour = pa.NoPays
  <span class="keyword"> GROUP BY</span>
     <span class="func"> IIf</span>(
         pa.PaysFR = "France",
