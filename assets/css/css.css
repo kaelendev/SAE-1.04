@@ -5,6 +5,10 @@ html {
     scroll-padding-top: 80px; /* hauteur de votre header */
 }
 
+a {
+    cursor: pointer;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--color-bg);

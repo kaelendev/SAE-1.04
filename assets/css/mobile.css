@@ -45,7 +45,19 @@
         flex-direction: column;
     }
 
-    
+    .pictures {
+        
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .pictures > li {
+        width: 70vw;
+        padding: 10px;
+        
+    }
+
+
 
     
 }
