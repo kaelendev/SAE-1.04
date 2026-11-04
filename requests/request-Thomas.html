@@ -50,7 +50,7 @@
 </div>
 <div class="text action">
     <h2>Comment cela a été réalisé</h2>
-    <p>Cette requête SQL a été faite en faisant une jointure entre la table <em>Commande</em> et la table <em>DetailCommande</em> pour obtenir la référence du produit de la commande que l'on va utiliser sur une autre jointure avec la table <em>Produit</em> qui nous le code de la catégorie du produit. Ce code de catégorie va nous permettre d'accéder, à travers une jointure à la table <em>Categorie</em>, au nom de la catégorie pour laquelle nous voulons le top 3 des sociétés avec le pus de commande dans celle-ci. La dernière jointure est celle de la table <em>Fournisseur</em> qui nous permet d'accéder au nom de la société.
+    <p>Cette requête SQL a été faite en faisant une jointure entre la table <em>Commande</em> et la table <em>DetailCommande</em> pour obtenir la référence du produit de la commande que l'on va utiliser sur une autre jointure avec la table <em>Produit</em> qui nous le code de la catégorie du produit. Ce code de catégorie va nous permettre d'accéder, à travers une jointure à la table <em>Categorie</em>, au nom de la catégorie pour laquelle nous voulons le top 3 des sociétés avec le plus de commande dans celle-ci. La dernière jointure est celle de la table <em>Fournisseur</em> qui nous permet d'accéder au nom de la société.
     <br><br>
     On trie pour n'avoir que les société de la catégorie "Viandes" et sur les commandes passées en 2021.<br>
     On groupe par nom de société en selectionnant le nom de la société et le nombre de commande dans la catégorie associée choisie et on peut enfin afficher le 3 premiières sociétés ayant fait le plus de commande par ordre décroissant avec leur nombres de requêtes respectives dans cette catégorie à chacune.

@@ -50,9 +50,8 @@
 <div class="text action">
     <h2>Comment cela a été réalisé</h2>
     <p>Pour cela, j’ai joint les tables Produit, DétailCommande, Catégorie, Fournisseur et Pays. J’ai ensuite regroupé les fournisseurs à l’aide de deux fonctions IIf
-         pour regroupé les fournisseurs français si leurs pays est la France. Si cela n'est pas le cas, je les regroupe en les fournisseurs des autres pays de l’Union européenne si il vient d'un pays de UE 
-         et les autres sont regroupés en Hors UE.
-        Enfin, j’ai calculé le chiffre d’affaires total et la quantité de produits vendus afin de comparer facilement les différents groupes et voir quel groupe est le plus intéressants à investir. 
+         pour regrouper les fournisseurs français entre eux si leur pays est la France. Sinon, je les regroupe avec les fournisseurs des autres pays de l’Union européenne s’ils viennent d’un pays de l’UE  les autres sont regroupés dans la catégorie  Hors UE .
+        Enfin, j’ai calculé le chiffre d’affaires total et la quantité de produits vendus afin de comparer facilement les différents groupes et de voir dans lesquels il est le plus intéressant d’investir.
     </p>
 </div>
 </article>
@@ -65,7 +64,7 @@
         pa.PaysFR = "France",
         "France",
          <span class="func"> Iif</span>(pa.UE = True, "Union européenne", "Hors UE")
-    )  <span class="fonctions"> AS </span>[Zobe de provenance],
+    )  <span class="fonctions"> AS </span>[Zone de provenance],
     <span class="func"> Sum</span>(d.Quantité * p.CoutAchat * c.CoefMarge) AS [CA zone],
      <span class="func"> Sum</span>(d.Quantité) AS [Unités vendues]
  <span class="keyword"> FROM</span>

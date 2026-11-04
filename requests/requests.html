@@ -51,14 +51,19 @@
     <div class="text penser">
         <h2> Notre réflexion </h2>
         <p>L'intérêt de cette requête est de trouver facilement les fournisseurs qui proposent deux types de protéines animales : le poisson et la viande.
+            Ainsi, si KDou manque de poisson ou de viande, elle peut facilement en commander auprès de ces fournisseurs.
         </p>
     </div>
     <div class="text action">
         <h2> Ce qu'on a fait</h2>
         <p>Pour réaliser cette requête, nous avons sélectionné la table Fournisseur, puis créé deux sous-requêtes.
-            La première récupère les numéros des fournisseurs associés à des produits dont la catégorie contient le mot « poisson ».
-            La deuxième fait la même chose pour les produits de la catégorie « viandes ».
+            Pour la première sous-requête, nous faisons une jointure entre les tables Produit et Catégorie.
+            Puis, nous utilisons LIKE pour sélectionner uniquement les produits dont le nom de catégorie contient un mot similaire à « poisson ».
+            Nous devons procéder ainsi, car les noms des catégories peuvent contenir d'autres mots que celui recherché.
+            Pour éviter d'obtenir de faux résultats, nous devons donc utiliser LIKE.
+            La deuxième sous-requête fait la même chose pour les produits de la catégorie « Viandes », avec LIKE "*Viande*".
             Enfin, nous avons trié les résultats par numéro de fournisseur et affiché toutes les colonnes de la table Fournisseur.
+            Nous avons ainsi facilement les coordonnées des fournisseurs auprès desquels passer commande.
         </p>
     </div>
     </article>
@@ -94,10 +99,10 @@
             <th scope="col">Fonction</th>
             <th scope="col">Adresse</th>
             <th scope="col">Ville</th>
-            <th scope="col">Region</th>
+            <th scope="col">Région</th>
             <th scope="col">CP</th>
-            <th scope="col">Numero Pays</th>
-            <th scope="col">Tel</th>
+            <th scope="col">Numéro de pays</th>
+            <th scope="col">Tél.</th>
         </tr>
         </thead>
         <tbody>
@@ -138,15 +143,21 @@
 <div class="text penser">
     <h2> Notre réflexion </h2>
     <p>L'intérêt de cette requête est de repérer les fournisseurs qui ne vendent que des desserts,
-         car ces produits peuvent avoir un impact sur la santé des clients.
+         car ces produits peuvent avoir un impact sur la santé des clients. Ainsi, si KDou sait quels
+         fournisseurs ne proposent que des produits potentiellement nocifs pour la santé de ses clients,
+         elle peut revoir ses partenariats avec eux. Cela donnerait une image plus positive de l'entreprise.
     </p>
 </div>
 <div class="text action">
     <h2> Ce qu'on a fait</h2>
     <p>Pour réaliser cette requête, nous avons utilisé la table Fournisseur et créé deux sous-requêtes.
-         La première repère les fournisseurs qui proposent des produits n'appartenant pas à la catégorie « Desserts », s'il y en a, nous les excluons du résultat.
-          La deuxième repère les fournisseurs qui proposent des produits de la catégorie « Desserts ».
-           Enfin, nous avons trié les résultats par société et affiché le nom, le numéro et la ville du fournisseur afin de pouvoir l'identifier plus facilement.
+         La première repère les fournisseurs qui proposent des produits n'appartenant pas à la catégorie « Desserts ».
+         Cela est réalisé grâce à la jointure entre les tables Produit et Catégorie.
+         Puis, nous sélectionnons avec NOT IN les produits qui ne sont pas de la catégorie « Desserts ».
+         Ainsi, nous excluons les fournisseurs qui proposent des produits d'autres catégories.
+         La deuxième sous-requête sélectionne les fournisseurs restants avec IN, à partir d'une jointure entre les tables Produit et Catégorie.
+         Nous récupérons ainsi uniquement les entreprises qui vendent des desserts.
+         Enfin, nous avons trié les résultats par société et affiché le nom, le numéro et la ville du fournisseur afin de pouvoir identifier plus facilement les entreprises.
     </p>
 </div>
 </article>
@@ -229,12 +240,14 @@
     </div>
     <div class="text action">
         <h2> Ce qu'on a fait</h2>
-        <p>Pour réaliser cette requête, nous avons joint les tables Catégorie, Produit, Fournisseur, DétailCommande et Pays. 
-            Nous avons sélectionné les fournisseurs membres de l'Union européenne, puis nous avons regroupé les résultats par fournisseur, produit et pays d'origine.
-            Nous avons ensuite trié les résultats par chiffre d'affaires décroissant et affiché la société du fournisseur, le nom du produit, le pays, le chiffre d'affaires et la marge.
-            Le chiffre d'affaires est calculé à partir des quantités vendues, du coût d'achat, du coefficient de marge et de la remise.
-            Et la marge est calculée par la vente moins le coût d'âchat et de la quantité.
-             Ces résultats permettent de repérer les produits les plus vendus et d'examiner leur marge afin de déterminer si des changements sont nécessaires.
+        <p>Pour réaliser cette requête,nous avons joint les tables Catégorie, Produit, Fournisseur, DétailCommande et Pays.
+            Nous avons sélectionné les fournisseurs qui viennent d'un pays membre de l'Union européenne, puis nous avons regroupé les résultats par fournisseur, produit et pays.
+            Nous avons ensuite trié les résultats par chiffre d'affaires décroissant.
+            Nous avons décidé d'afficher la société du fournisseur, le nom du produit, le pays, le chiffre d'affaires et la marge.
+            Le chiffre d'affaires est calculé à partir des quantités vendues, du coût d'achat, du coefficient de marge et de la remise grâce à la commande SUM et ROUND.
+            La marge est calculée en soustrayant le coût d'achat des produits de leur prix de vente.
+             Ces résultats permettent de repérer les produits les plus vendus et d'examiner leur marge afin de voir facilement lesquels sont rentables.
+             L'affichage des fournisseurs permet également de connaître l'origine des produits et de savoir avec qui revoir les arrangements.
         </p>
     </div>
 </article>
@@ -332,9 +345,15 @@
             <h2> Ce qu'on a fait</h2>
             <p>Pour réaliser cette requête, nous avons joint les tables Catégorie et Produit afin de sélectionner les desserts et les boissons et d'obtenir leur coefficient de marge, leur nom et leur coût. 
                 Nous avons ensuite joint les tables Fournisseur, DétailCommande et Commande pour récupérer les noms des fournisseurs, les quantités commandées, les remises et les dates des commandes.
-            Nous avons regroupé les résultats par année, produit et fournisseur, puis les avons triés par année et par chiffre d'affaires décroissants.
-             Les fonctions SUM et ROUND permettent de calculer le chiffre d'affaires et de l'arrondir à deux décimales.
-            Ces résultats permettent de repérer les produits les plus vendus et, si nécessaire, de savoir quel fournisseur contacter ou quels produits moins mettre en vente.
+            Nous avons regroupé les résultats par année de commande grâce à la fonction YEAR, ainsi que par nom de produit et nom de la société du fournisseur,
+            puis nous les avons triés par année et par chiffre d'affaires décroissants grâce à DESC.
+            Nous avons décidé d'afficher le nom du produit et celui de la société afin de pouvoir identifier rapidement le produit et son origine.
+            Pour obtenir les résultats souhaités, nous avons utilisé les fonctions ROUND et SUM.
+            ROUND permet d'afficher le résultat avec un nombre défini de chiffres après la virgule.
+            Cela évite les problèmes d'affichage dans Access.
+            La fonction SUM nous permet de calculer la somme des marges, qui correspondent à la différence entre le prix de vente et le coût d'achat.
+            Ces résultats permettent de repérer les produits les plus vendus et les quantités achetées.
+            Cela permet de savoir quel fournisseur contacter ou quels produits moins mettre en vente si l'on juge qu'ils nuisent à la santé des clients ou qu'ils sont trop commandés.
             </p>
         </div>
     </article>
@@ -429,10 +448,14 @@
     </div>
     <div class="text action">
         <h2> Ce qu'on a fait</h2>
-        <p>Pour réaliser cette requête, nous avons joint les tables Catégorie, Produit et Fournisseur, puis sélectionné les produits de la catégorie « Viandes » qui n'apparaissent dans aucune commande.
+        <p>Pour réaliser cette requête, nous avons joint les tables Catégorie, Produit et Fournisseur.
+            Puis, nous avons filtré les données pour ne garder que les produits de la catégorie « Viandes » qui n'ont pas été commandés.
             Nous avons trié les résultats par nom de produit et affiché le nom du produit, la société du fournisseur et le prix arrondi à deux décimales.
-            Une sous-requête compte les produits carnés non vendus, tandis qu'une autre compte le nombre total de produits de cette catégorie.
-             Nous pouvons ainsi comparer ces nombres et déterminer si les prix de certains produits doivent être revus.
+            Nous avons créé deux sous-requêtes. La première reprend la même structure que la requête, mais compte le nombre de produits de la catégorie qui n'ont pas été vendus.
+            Cela est fait grâce à COUNT(*), qui compte toutes les lignes de la sélection et projette le résultat sous le nom Nombre_non_vendus.
+            La deuxième sous-requête suit le même principe, mais compte tous les produits de la catégorie « Viandes » et projette le résultat sous le nom Nombres_total.
+            Nous pouvons ainsi comparer le nombre de produits de la catégorie « Viandes » qui n'ont pas été vendus à celui des produits vendus.
+            Enfin, nous pouvons facilement voir l'origine des produits grâce à leur nom et à celui du fournisseur, puis renégocier le prix d'achat.
         </p>
     </article>
 
@@ -512,14 +535,19 @@
     <div class="text penser">
         <h2> Notre réflexion </h2>
         <p>L'intérêt de cette requête est de vérifier si les partenaires commandent autant que les clients. 
-        Cela permettrait à Kdou de savoir si ce modèle, où des clients en amènent d'autres, est rentable ou non.</p>
+        Cela permettrait à Kdou de savoir si ce modèle, où des clients en amènent d'autres, est intéressant ou non. </p>
     </div>
     <div class="text action">
         <h2> Ce qu'on a fait</h2>
-        <p>Pour répondre à cette question, nous avons joint la table Client à elle-même à l'aide de l'identifiant du client et de celui de son partenaire.
-             Nous avons ensuite créé une sous-requête qui compte les commandes de chaque client, puis associé ce résultat aux deux tables Client.
-            Nous avons sélectionné les clients et leurs partenaires ayant passé le même nombre de commandes. 
-            Enfin, nous avons trié les résultats par nom de client et affiché le nom ainsi que le nombre de commandes de chacun.</p>
+        <p>Pour répondre à cette question, nous avons joint la table Clientele à elle-même à l'aide de l'identifiant du client et de celui de son partenaire.
+            Puis, nous avons créé deux sous-requêtes dans la jointure.
+            La première récupère le code client dans la table Commande et compte le nombre de commandes avec COUNT.
+            Ensuite, nous l'associons à la première table Clientele, ce qui nous indique le nombre de commandes passées par les clients.
+            Pour la deuxième sous-requête, nous faisons la même chose avec la seconde table Clientele, qui représente les partenaires.
+            Cela permet de connaître le nombre de commandes passées par les partenaires.
+            Enfin, nous filtrons les résultats pour ne garder que les cas où le nombre de commandes des clients est égal à celui de leurs partenaires.
+            Pour l'affichage, nous trions par ordre alphabétique du nom du client et affichons son nom, son nombre de commandes, ainsi que le nom de son partenaire et le nombre de commandes de celui-ci.
+    </p>
     </div>
     </article>
 
