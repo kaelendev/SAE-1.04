@@ -50,7 +50,13 @@
 </div>
 <div class="text action">
     <h2>Comment cela a été réalisé</h2>
-    <p>Pour cela ...</p>
+    <p>Pour cela, j'ai pris la table commande vu que c'est la table qui a les dates de commandes.
+        Puis, j'ai filtré pour garder seulement le mois de mars grâce à la commmande DatePart, qui cherche les mois de la table date de commande qui soit égale à 3 (le mois de mars).
+        Puis, j'ai filtré les dates de commandes qui sont égales ou supérieur aux 25 mars par ans, qui est la date où l'heure peut passer à l'heure d'été.
+        Puis, j'ai filtré pour juste trouver le 7ème jour de la semaine grâce à la commande Weekday.
+        Où, on va trouver le dimanche de la semaine du 25 mars, qui est le jour du changement d'heure.
+        Enfin, j'ai trié par la valeur de la date et j'ai affiché la date des commandes qui ont été faites lors d'un chagement d'heure avec DISTINTC pour éviter d'avoir des doublons.
+    </p>
 </div>
 
 </article>
